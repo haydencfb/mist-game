@@ -55,7 +55,7 @@ const resolvers = {
 
         },
 
-        saveBook: async (_parent: any, { bookData }: { bookData: BookDocument }, context: UserDocument): Promise<UserDocument | null> => {
+        saveGame: async (_parent: any, { gameData }: { gameData: GameDocument }, context: UserDocument): Promise<UserDocument | null> => {
 
             try {
                 if (!context) {
@@ -64,29 +64,29 @@ const resolvers = {
 
                 const updatedUser = await User.findByIdAndUpdate(
                     context._id,
-                    { $addToSet: { savedBooks: bookData } },
+                    { $addToSet: { savedGames: gameData } },
                     { new: true }
                 );
 
                 return updatedUser;
             } catch (err) {
-                throw new AuthenticationError('SaveBook failed');
+                throw new AuthenticationError('SaveGame failed');
             }
             
         }, 
 
-        removeBook: async (_parent: any, { bookId }: { bookId: BookDocument }, context: UserDocument): Promise<UserDocument | null> => {
+        removeGame: async (_parent: any, { gameId }: { gameId: GameDocument }, context: UserDocument): Promise<UserDocument | null> => {
 
             try {
                 const updatedUser = await User.findByIdAndUpdate(
                     context._id,
-                    { $pull: { savedBooks: bookId } },
+                    { $pull: { savedGames: gameId } },
                     { new: true }
                 );
 
                 return updatedUser;
             } catch (err) {
-                throw new AuthenticationError('RemoveBook failed');
+                throw new AuthenticationError('RemoveGame failed');
             }
 
         }
