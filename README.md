@@ -1,45 +1,53 @@
+# Mist Games
 
-  # GraphQL Refactor
-  ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-  ## This project consisted of a RESTful API that needed to be refactored to incorperate GraphQL in order to make these requests at a more industry-standard level. This in mind, this is uses Google's Books API to allow users to create an account, log in and out, and save books to their profiles.
+## Overview
 
-  - My motivation for this project was to become more comforabtle and more understanding of the use and purpose of GraphQL.
-  - I built this project because I wanted to further understand GraphQL and the real world use of it. Since I had already become relatively comfortable with the RESTful method, I wanted to understand the reasoning behind making a switch.
-  - This project solves the problem of having code that is not up to industry standard, as it lacks the newest capabilities and efficiencies that it could having using updated and renovated methods.
-  - I learned more about GraphQL, its use, and what it intends to 'replace' within the coding space.
+Welcome to our Full-Stack Project! The application allows users to search for a stock symbol (in example - AAPL for Apple Inc.) and retrieve the previous close market price for that symbol.
 
-  ## Table of Contents
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Issues](#issues)
-  - [Contributions](#contributions)
-  - [Tests](#tests)
-  - [Questions](#questions)
-  - [Link](#link)
-  - 
- - [License](#license)
+## Features
 
-  ## Installation
-  Clone repository to local machine and run 'npm i'.
+1) **Search Functionality:** Users can input a stock symbol into a search field.
 
-  ## Usage
-  npm i; npm run build; npm run start;
+2) **API Integration:** The application utilizes the YH Finance API from RapidAPI to fetch stock data.
 
-  ## Issues
-  Users can report issues VIA my email linked below, or PM through GitHub.
+3) **Data Display:** Upon entering a valid stock symbol, the application sends a request to the YH Finance API, which returns the previous close market price then displays a chart using Chart.js
 
-  ## Contributions
-  I am more than willing to look at push requests if they are made!
+4) **User Feedback:** The application provides clear feedback to users, displaying the previous close price or an error message if the symbol is not valid or if the API call fails.
 
-  ## Tests
-  To run tests, run the following command: npm run test;
 
-  ## Questions
-  If you have any questions, please feel free to reach out to me at haydenfitzbrintle@gmail.com or visit my GitHub profile at [https://github.com/haydencfb]
+## Installation
 
-  ## Link
-  [https://graphql-refactor1.onrender.com]
+```
+git clone https://github.com/haydencfb/Stock-Project.git
+```
+```
+npm install
+```
 
-  ## License
-    This project is licensed under the MIT license.
+```
+npm run start:dev
+```
+
+## Screenshot
+
+![Screenshoit](./assets/sample.png)
+
+## Link To Deployment:
+
+https://stock-project-mo4x.onrender.com
+
+## Login
+
+Username: HaydenFB
+Password: password
+
+## Contributors
+
+[Hayden Fitzpatrick-Brintle](https://github.com/haydencfb)
+
+[John Marquez](https://github.com/jvhnn)
+
+[John Dinh](https://github.com/jandgdinh)
+
+[Brian Petros](https://github.com/brianleepetros)
