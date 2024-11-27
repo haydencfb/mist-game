@@ -1,7 +1,7 @@
 import { signToken, AuthenticationError } from "../services/auth-service.js";
 import { UserContext } from "../models/User.js";
 import { UserDocument } from "../models/User.js";
-import { BookDocument } from "../models/Book.js"; 
+import { GameDocument } from "../models/Game.js"; 
 import User from "../models/User.js";
 
 const resolvers = {

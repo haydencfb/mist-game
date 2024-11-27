@@ -1,4 +1,4 @@
 import User from './User';
-import Book from './Game';
+import Game from './Game';
 
 export default { User, Game };
