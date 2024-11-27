@@ -1,16 +1,16 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
-import bookSchema from './Book.js';
-import type { BookDocument } from './Book.js';
+import gameSchema from './Game.js';
+import type { GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
   id: string;
   username: string;
   email: string;
   password: string;
-  savedBooks: BookDocument[];
+  savedGames: GameDocument[];
   isCorrectPassword(password: string): Promise<boolean>;
-  bookCount: number;
+  gameCount: number;
 }
 
 export interface UserContext extends Document {
@@ -38,7 +38,7 @@ const userSchema = new Schema<UserDocument>(
       type: String,
       required: true,
     },
-    savedBooks: [bookSchema],
+    savedGames: [gameSchema],
   },
   {
     toJSON: {
@@ -60,8 +60,8 @@ userSchema.methods.isCorrectPassword = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('bookCount').get(function () {
-  return this.savedBooks.length;
+userSchema.virtual('gameCount').get(function () {
+  return this.savedGames.length;
 });
 
 const User = model<UserDocument>('User', userSchema);
