@@ -1,8 +1,11 @@
-import type { Book } from './Book';
+import type { Game } from './Game';
 
 export interface User {
-  username: string | null;
-  email: string | null;
-  password: string | null;
-  savedBooks: Book[];
+  id: string;
+  username: string;
+  email: string;
+  password: string;
+  savedGames: Game[];
+  isCorrectPassword(password: string): Promise<boolean>;
+  gameCount: number;
 }
