@@ -40,4 +40,6 @@ const gameSchema = new Schema<GameDocument>({
 
 const Game = model('game', gameSchema);
 
+export { gameSchema };
+
 export default Game;
