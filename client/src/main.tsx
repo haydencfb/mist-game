@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import App from './App.jsx'
 import SearchBooks from './pages/SearchBooks'
 import SavedBooks from './pages/SavedBooks'
+import SignupForm from './components/SignupForm'
+
+
 
 const router = createBrowserRouter([
   {
@@ -15,10 +18,18 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SearchBooks />
-      }, {
+      }, 
+      {
         path: '/saved',
         element: <SavedBooks />
+      },
+      {
+        path: '/signup',
+        element: <SignupForm handleModalClose={function (): void {
+          throw new Error('Function not implemented.')
+        } } />
       }
+
     ]
   }
 ])

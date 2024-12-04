@@ -17,6 +17,7 @@
     "concurrently": "^8.2.0"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.9"
+    "@apollo/client": "^3.11.9",
+    "@toolpad/core": "^0.10.0"
   }
 }
