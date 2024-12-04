@@ -1,3 +1,4 @@
+
 import './App.css';
 
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
@@ -5,11 +6,12 @@ import LoginForm from './components/LoginForm';
 
 
 const client = new ApolloClient({
-  uri: '/graphql',
-  cache: new InMemoryCache(),
-});
+   uri: '/graphql',
+   cache: new InMemoryCache(),
+ });
 
-import Navbar from './components/Navbar';
+ import Navbar from './components/Navbar';
+
 
 function App() {
   return (
@@ -24,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+    export default App;
