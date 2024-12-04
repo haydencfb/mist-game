@@ -1,4 +1,4 @@
-import { Schema, type Document } from 'mongoose';
+import { Schema, type Document, model } from 'mongoose';
 
 export interface GameDocument extends Document {
   title: string;
@@ -38,8 +38,6 @@ const gameSchema = new Schema<GameDocument>({
   },
 });
 
-// const Game = model('game', gameSchema);
+const Game = model('game', gameSchema);
 
-// export default Game;
-
-export default { gameSchema };
+export default Game;
