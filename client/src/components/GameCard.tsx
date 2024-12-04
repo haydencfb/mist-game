@@ -1,4 +1,4 @@
-import { Book } from "../models/Book";
+import { Book } from "../models/Game";
 
 const GameCard = ( Book: Book) => {
     // nothing going on
