@@ -2,39 +2,38 @@ import { Schema, type Document, model } from 'mongoose';
 
 export interface GameDocument extends Document {
   title: string;
+  released: string;
   parent_platforms: string[];
-  rating: number;
+  floatRating: number;
   image: string;
-  // tags: string[];
 }
 
 export interface GameInput extends Document {
-  parent_platforms: string[];
-  rating: number;
   title: string;
+  released: string;
+  parent_platforms: string[];
+  floatRating: number;
   image: string;
-  // tags: string[];
 }
 
 const gameSchema = new Schema<GameDocument>({
-  parent_platforms: [{ 
-    platform: {
-    //  id: Number, 
-      name: String, 
-      // slug: String 
-    } 
-  }],
-  rating: {
+  title: {
+    type: String,
+  },
+  released: {
+    type: String,
+  },
+  parent_platforms: [
+    { 
+      platform: {
+        name: String, 
+      } 
+    }
+  ],
+  floatRating: {
     type: Number,
   },
   image: {
-    type: String,
-  },
-//   tags:[ {
-//     type: String,
-//   },
-// ],
-  title: {
     type: String,
   },
 });
