@@ -1,11 +1,13 @@
-
+import React from 'react'
  import ReactDOM from 'react-dom/client'
  import { createBrowserRouter, RouterProvider } from 'react-router-dom'
  import 'bootstrap/dist/css/bootstrap.min.css'
 
  import App from './App.jsx'
- import SearchBooks from './pages/SearchBooks'
+//  import SearchBooks from './pages/SearchBooks'
  import SavedBooks from './pages/SavedBooks'
+ import SignupForm from './components/SignupForm'
+ import LoginForm from './components/LoginForm'
 
  const router = createBrowserRouter([
    {
@@ -15,11 +17,18 @@
      children: [
        {
          index: true,
-         element: <SearchBooks />
+         element: <LoginForm handleModalClose={function (): void {
+           throw new Error('Function not implemented.')
+         } } />
        }, {
          path: '/saved',
          element: <SavedBooks />
-       }
+       }, {
+        path: '/signup',
+        element: <SignupForm handleModalClose={function (): void {
+          throw new Error('Function not implemented.')
+        } } />
+      },  
      ]
    }
  ])
