@@ -1,8 +1,9 @@
 
 import './App.css';
-
+import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import LoginForm from './components/LoginForm';
+
+
 
 
 const client = new ApolloClient({
@@ -11,17 +12,14 @@ const client = new ApolloClient({
  });
 
  import Navbar from './components/Navbar';
+import { Outlet } from 'react-router-dom';
 
 
 function App() {
   return (
     <ApolloProvider client={client}>
       <Navbar />
-      <LoginForm handleModalClose={function (): void {
-        throw new Error('Function not implemented.');
-      } } />
-
-
+      <Outlet />
     </ApolloProvider>
   );
 }
