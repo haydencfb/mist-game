@@ -1,8 +1,7 @@
-export interface Book {
-  authors: string[],
-  description: string;
-  bookId: string;
-  image: string;
-  link: string;
+export interface Game {
   title: string;
+  released: string;
+  parent_platforms: string[];
+  floatRating: number;
+  image: string;
 }
