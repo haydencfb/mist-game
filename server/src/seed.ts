@@ -4,6 +4,7 @@ import fetch from "node-fetch";
 import Game from "./models/Game.js";
 
 dotenv.config();
+const apiKey = process.env.RAWGAPI_KEY;
 
 const games: {
   title: string;
@@ -14,8 +15,7 @@ const games: {
 }[] = [];
 
 const fetchData = async () => {
-    console.log('hit');
-    const response = await fetch("https://api.rawg.io/api/games?key=8db1f6c1e982492ba3b87de3d5540237")
+    const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}`);
     const data = await response.json();
       console.log(data);
       data.results.forEach((g: any) => {
