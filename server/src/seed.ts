@@ -5,28 +5,26 @@ import Game from "./models/Game.js";
 
 dotenv.config();
 
-// console.log(process.env.MONGODB_URI)
-
 const games: {
   title: string;
+  released: string;
   parent_platforms: string[];
-  rating: number;
+  floatRating: number;
   image: string;
-//   tags: string[];
 }[] = [];
 
 const fetchData = async () => {
     console.log('hit');
-  const response = await fetch("https://api.rawg.io/api/games?key=NA")
+    const response = await fetch("https://api.rawg.io/api/games?key=8db1f6c1e982492ba3b87de3d5540237")
     const data = await response.json();
       console.log(data);
       data.results.forEach((g: any) => {
         const nextGame = {
           title: g.name,
+          released: g.released,
           parent_platforms: g.parent_platforms,
-          rating: g.rating,
+          floatRating: g.rating,
           image: g.background_image,
-          tags: g.tags,
         };
         games.push(nextGame);
       });
