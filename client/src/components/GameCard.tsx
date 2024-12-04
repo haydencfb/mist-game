@@ -1,5 +1,5 @@
 import { Book } from "../models/Book";
 
-const GameCard = ( Book: Book) => {
+const BookCard = ( Book: Book) => {
     // nothing going on
 }
