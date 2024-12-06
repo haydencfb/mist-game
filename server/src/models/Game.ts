@@ -1,4 +1,4 @@
-import { Schema, type Document, model } from 'mongoose';
+import mongoose, { Schema, type Document, model } from 'mongoose';
 
 export interface GameDocument extends Document {
   title: string;
@@ -24,11 +24,12 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
   },
   parent_platforms: [
-    { 
+    {
+      _id: mongoose.Schema.Types.ObjectId,
       platform: {
-        name: String, 
-      } 
-    }
+        name: String,
+      },
+    },
   ],
   floatRating: {
     type: Number,
