@@ -52,10 +52,3 @@ export const deleteGame = (gameId: string, token: string) => {
     },
   });
 };
-
-const key = "AIzaSyAEDCUYBMnxqd-IVqo_nd6o2tf6PR2HtnE";
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query: string) => {
-    return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${key}`);
-};

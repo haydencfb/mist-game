@@ -4,7 +4,6 @@ import { gameSchema } from './Game.js';
 import type { GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
-  // _id: string;
   username: string;
   email: string;
   password: string;
