@@ -6,14 +6,21 @@ export const GET_ME = gql`
             _id
             username
             email
+            password
             savedGames {
-                gameId
+                _id
                 title
                 released
-                parent_platforms
+                parent_platforms {
+                    _id
+                    platform {
+                        name
+                    }
+                }
                 floatRating
                 image
-            }
+                }
+            gameCount
         }
     }
 `;
@@ -26,10 +33,10 @@ export const GET_ALL_GAMES = gql`
             released
             parent_platforms {
                 _id
-                platforms {
-                    name
+                platform {
+                        name
+                    }   
                 }
-            }
             floatRating
             image
         }
@@ -37,12 +44,17 @@ export const GET_ALL_GAMES = gql`
 `;
 
 export const GET_GAME = gql`
-    query getGame($gameId: ID!) {
-        getGame(gameId: $gameId) {
-            gameId
+    query GET_GAME($title: String!) {
+        getGame(title: $title) {
+            _id
             title
             released
-            parent_platforms
+            parent_platforms {
+                _id
+                platform {
+                    name
+                }
+            }
             floatRating
             image
         }

@@ -7,7 +7,7 @@ import Game from "../models/Game.js";
 
 const resolvers = {
     Query: {
-        me: async (_parent: any, _args: any, context: UserContext): Promise<UserDocument | null> => {
+        me: async (context: UserContext): Promise<UserDocument | null> => {
 
             try {
                 if (context.user) {
@@ -22,20 +22,21 @@ const resolvers = {
         },
 
         getAllGames: async () => {
+
             try {
-              const games = await Game.find();
-              games.forEach(game => console.log("Parent Platforms:", game.parent_platforms));
-              return games;
+                const games = await Game.find();
+                games.forEach(game => console.log("Parent Platforms:", game.parent_platforms));
+                return games;
             } catch (err) {
-              throw new AuthenticationError("GetAllGames Failed");
+                throw new AuthenticationError("GetAllGames Failed");
             }
-          },
-          
+            
+        },
 
-        getGame: async (_parent: any, _args: any): Promise<GameDocument | null> => {
+        getGame: async (_parent: any, _args: { title: string }): Promise<GameDocument | null> => {
 
             try {
-                const gameData = await Game.findOne({ _id: _args._id });
+                const gameData = await Game.findOne({ title: _args.title });
                 if (!gameData) {
                     throw new AuthenticationError('Game not found');
                 }
@@ -43,7 +44,6 @@ const resolvers = {
             } catch (err) {
                 throw new AuthenticationError('GetGame Failed');
             }
-            return null;
 
         },
     },
