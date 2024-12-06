@@ -1,30 +1,21 @@
 
 import './App.css';
-import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
-
-
-
 const client = new ApolloClient({
-   uri: '/graphql',
-   cache: new InMemoryCache(),
- });
-
-import Navbar from './components/Navbar';
-import SearchBooks from './pages/SearchBooks';
-
+  uri: '/graphql',
+  cache: new InMemoryCache(),
+});
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      {/* <LoginForm handleModalClose={function (): void {
-        throw new Error('Function not implemented.');
-      } } /> */}
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
     </ApolloProvider>
   );
 }
 
-    export default App;
+export default App;
