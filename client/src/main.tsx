@@ -8,6 +8,8 @@ import React from 'react'
  import SavedBooks from './pages/SavedBooks'
  import SignupForm from './components/SignupForm'
  import LoginForm from './components/LoginForm'
+ import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+ import HomePage from './pages/HomePage'
 
  const router = createBrowserRouter([
    {
@@ -15,12 +17,18 @@ import React from 'react'
      element: <App />,
      errorElement: <h1 className='display-2'>Wrong page!</h1>,
      children: [
-       {
-         index: true,
-         element: <LoginForm handleModalClose={function (): void {
-           throw new Error('Function not implemented.')
-         } } />
-       }, {
+      //  {
+      //    index: true,
+      //    element: <LoginForm handleModalClose={function (): void {
+      //      throw new Error('Function not implemented.')
+      //    } } />
+      //  },
+
+      {
+        index: true,
+        element: <HomePage />
+      },
+        {
          path: '/saved',
          element: <SavedBooks />
        }, {
