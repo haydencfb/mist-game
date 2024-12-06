@@ -1,4 +1,4 @@
-import mongoose, { Schema, type Document, model } from 'mongoose';
+import { Schema, type Document, model } from 'mongoose';
 
 export interface GameDocument extends Document {
   title: string;
@@ -25,7 +25,7 @@ const gameSchema = new Schema<GameDocument>({
   },
   parent_platforms: [
     {
-      _id: mongoose.Schema.Types.ObjectId,
+      // _id: mongoose.Schema.Types.ObjectId,
       platform: {
         name: {
           type: String,
