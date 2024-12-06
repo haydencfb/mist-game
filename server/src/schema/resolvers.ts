@@ -22,23 +22,15 @@ const resolvers = {
         },
 
         getAllGames: async () => {
-                
             try {
-                const games = await Game.find();
-                return games.map(game => {
-                    if (!game._id) {
-                        throw new Error('Game _id is missing');
-                    }
-                    if (!game.parent_platforms || game.parent_platforms.length === 0) {
-                        throw new Error('ParentPlatforms _id is missing');
-                    }
-                    return game;
-                });
+              const games = await Game.find();
+              games.forEach(game => console.log("Parent Platforms:", game.parent_platforms));
+              return games;
             } catch (err) {
-                throw new AuthenticationError('GetAllGames Failed');
+              throw new AuthenticationError("GetAllGames Failed");
             }
-
-        },
+          },
+          
 
         getGame: async (_parent: any, _args: any): Promise<GameDocument | null> => {
 

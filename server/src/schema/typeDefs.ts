@@ -1,65 +1,67 @@
-import { gql } from 'graphql-tag';
+import { gql } from "graphql-tag";
 
 const typeDefs = gql`
-    type User {
-        _id: ID!
-        username: String!
-        email: String
-        password: String
-        gameCount: Int
-        savedGames: [Game]
-    }
+  type User {
+    _id: ID!
+    username: String!
+    email: String
+    password: String
+    gameCount: Int
+    savedGames: [Game]
+  }
 
-    type Platform {
-        name: String
-    }
 
-    type ParentPlatforms {
-        _id: ID!
-        platforms: [Platform]
-    }
+  type Platform {
+  name: String
+}
 
-    type Game {
-        _id: ID!
-        title: String!
-        released: String
-        parent_platforms: [ParentPlatforms!]!
-        floatRating: Float
-        image: String
-    }
+type ParentPlatforms {
+  _id: ID!
+  platform: Platform
+}
 
-    type Auth {
-        token: ID!
-        user: User
-    }
+type Game {
+  _id: ID!
+  title: String!
+  released: String
+  parent_platforms: [ParentPlatforms!]!
+  floatRating: Float
+  image: String
+}
 
-    input GameInput {
-        _id: ID!
-        title: String!
-        released: String
-        parent_platforms: [String]
-        floatRating: Float
-        image: String
-    }
 
-    type Query {
-        me: User
-    }
+  type Auth {
+    token: ID!
+    user: User
+  }
 
-    type Query {
-        getAllGames: [Game!]!
-    }
+  input GameInput {
+    _id: ID!
+    title: String!
+    released: String
+    parent_platforms: [String]
+    floatRating: Float
+    image: String
+  }
 
-    type Query {
-        getGame: Game
-    }
+  type Query {
+    me: User
+  }
 
-    type Mutation {
-        login(email: String!, password: String!): Auth
-        addUser(username: String!, email: String!, password: String!): Auth
-        saveGame(gameData: GameInput!): User
-        removeGame(_id: ID!): User
-    }
-`
+  type Query {
+    getAllGames: [Game!]!
+  }
+
+  type Query {
+    getGame: Game
+  }
+
+  type Mutation {
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveGame(gameData: GameInput!): User
+    removeGame(_id: ID!): User
+  }
+`;
 
 export default typeDefs;
