@@ -1,5 +1,5 @@
 export interface Game {
-  gameId: string;
+  _id: string;
   title: string;
   released: string;
   parent_platforms: string[];
