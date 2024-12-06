@@ -10,7 +10,7 @@ const typeDefs = gql`
     }
 
     type Game {
-        gameId: ID!
+        _id: ID!
         title: String!
         released: String
         parent_platforms: [String]
@@ -24,7 +24,7 @@ const typeDefs = gql`
     }
 
     input GameInput {
-        gameId: ID!
+        _id: ID!
         title: String!
         released: String
         parent_platforms: [String]
@@ -36,11 +36,19 @@ const typeDefs = gql`
         me: User
     }
 
+    type Query {
+        getAllGames: Game
+    }
+
+    type Query {
+        getGame: Game
+    }
+
     type Mutation {
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         saveGame(gameData: GameInput!): User
-        removeGame(gameId: ID!): User
+        removeGame(_id: ID!): User
     }
 `
 

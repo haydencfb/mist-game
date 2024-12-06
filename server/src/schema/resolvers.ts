@@ -3,6 +3,7 @@ import { UserContext } from "../models/User.js";
 import { UserDocument } from "../models/User.js";
 import { GameDocument } from "../models/Game.js"; 
 import User from "../models/User.js";
+import Game from "../models/Game.js";
 
 const resolvers = {
     Query: {
@@ -15,7 +16,32 @@ const resolvers = {
                 }
             } catch (err) {
                 throw new AuthenticationError('Me Failed');
-                // return null;
+            }
+            return null;
+
+        },
+
+        getAllGames: async (_parent: any, _args: any): Promise<GameDocument[] | null> => {
+                
+            try {
+                const games = await Game.find({});
+                return games;
+            } catch (err) {
+                throw new AuthenticationError('GetAllGames Failed');
+            }
+
+        },
+
+        getGame: async (_parent: any, _args: any): Promise<GameDocument | null> => {
+
+            try {
+                const gameData = await Game.findOne({ _id: _args._id });
+                if (!gameData) {
+                    throw new AuthenticationError('Game not found');
+                }
+                return gameData;
+            } catch (err) {
+                throw new AuthenticationError('GetGame Failed');
             }
             return null;
 
