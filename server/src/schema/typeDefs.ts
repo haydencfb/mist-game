@@ -10,6 +10,7 @@ const typeDefs = gql`
     savedGames: [Game]
   }
 
+
   type Platform {
   name: String
 }
