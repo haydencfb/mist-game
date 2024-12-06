@@ -12,11 +12,11 @@ const typeDefs = gql`
 
     type Game {
         gameId: ID!
-        developers: [String]
-        description: String
         title: String!
+        released: String
+        parent_platforms: [String]
+        floatRating: Float
         image: String
-        tags: String
     }
 
     type Auth {
@@ -26,11 +26,11 @@ const typeDefs = gql`
 
     input GameInput {
         gameId: ID!
-        developers: [String]
-        description: String
         title: String!
+        released: String
+        parent_platforms: [String]
+        floatRating: Float
         image: String
-        tags: String
     }
 
     type Query {

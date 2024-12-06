@@ -9,9 +9,10 @@ import Auth from '../utils/auth';
 import { LOGIN_USER } from '../utils/mutations';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
-const LoginForm = ({}: { handleModalClose: () => void }) => {
+const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ 
     email: '', 
     password: '',
@@ -21,6 +22,8 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [login, { error }] = useMutation(LOGIN_USER);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
@@ -38,31 +41,34 @@ const LoginForm = ({}: { handleModalClose: () => void }) => {
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
+    // Check if the form is valid
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
+      return;
     }
-
+  
     try {
+      // Assuming `login` is a mutation function from Apollo Client
       const { data } = await login({
         variables: { ...userFormData },
       });
-
+  
+      // If login is successful, store the token and navigate to '/search'
       Auth.login(data.login.token);
+      setUserFormData({
+        email: '',
+        password: '',
+      });
+  
+      // Navigate to the search page after successful login
+      navigate('/search');
     } catch (err) {
-      console.error(err);
+      console.error('Login failed', err);
     }
-
-    setUserFormData({
-      email: '',
-      password: '',
-    });
   };
 
   return (
-    
     <>
     <div className="login-form-container">
       <h2 className="login-form-title">Login</h2>

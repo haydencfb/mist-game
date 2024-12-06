@@ -1,3 +1,12 @@
+import { Game } from "../models/Game";
+
+import * as React from 'react';
+import { useTheme } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 
@@ -12,8 +21,6 @@ import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
 import CheckIcon from '@mui/icons-material/Check';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { Search } from "@mui/icons-material";
-import { Box, Card, CardContent, CardMedia, IconButton } from '@mui/material';
-import { Game } from '../models/Game';
 
 export enum CardType {
     Search = 'SEARCH',
@@ -22,8 +29,7 @@ export enum CardType {
     Completed = 'COMPLETED',
 }
 
-
-export interface GameCardProps {
+interface GameCardProps {
     game: Game;
     cardType: CardType
     button1: () => void;
@@ -31,7 +37,13 @@ export interface GameCardProps {
     button3: () => void;
 }
 
-
+// export interface Game {
+//     title: string;
+//     released: string;
+//     parent_platforms: string[];
+//     floatRating: number;
+//     image: string;
+//   }
 
 const GameCard = ({ game, cardType, button1, button2, button3 }: GameCardProps) => {
 

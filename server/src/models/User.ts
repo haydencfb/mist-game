@@ -4,7 +4,7 @@ import { gameSchema } from './Game.js';
 import type { GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
-  id: string;
+  // _id: string;
   username: string;
   email: string;
   password: string;
@@ -56,11 +56,11 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-userSchema.methods.isCorrectPassword = async function (password: string) {
+userSchema.methods.isCorrectPassword = async function (password: string): Promise<boolean> {
   return await bcrypt.compare(password, this.password);
 };
 
-userSchema.virtual('gameCount').get(function () {
+userSchema.virtual('gameCount').get(function (this: UserDocument) {
   return this.savedGames.length;
 });
 

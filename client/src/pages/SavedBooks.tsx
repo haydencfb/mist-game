@@ -1,19 +1,19 @@
 import { Container, Card, Button, Row, Col } from 'react-bootstrap';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import { removeGameId } from '../utils/localStorage';
 import type { User } from '../models/User';
-// import { Book } from '../models/Book';
+// import { Game } from '../models/Game';
 import { useMutation, useQuery } from '@apollo/client';
-import { REMOVE_BOOK } from '../utils/mutations';
+import { REMOVE_GAME } from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
 
-const SavedBooks = () => {
+const SavedGames = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removeBook] = useMutation(REMOVE_BOOK);
+  const [removeGame] = useMutation(REMOVE_GAME);
   const userData: User = data?.me || {};
 
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteBook = async (bookId: string) => {
+  // create function that accepts the game's mongo _id value as param and deletes the game from the database
+  const handleDeleteGame = async (gameId: string) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -21,11 +21,11 @@ const SavedBooks = () => {
     }
 
     try {
-      await removeBook({
-        variables: { bookId },
+      await removeGame({
+        variables: { gameId },
       });
 
-      removeBookId(bookId);
+      removeGameId(gameId);
     } catch (err) {
       console.error(err);
     }
@@ -41,41 +41,41 @@ const SavedBooks = () => {
       <div className='text-light bg-dark p-5'>
         <Container>
           {userData.username ? (
-            <h1>Viewing {userData.username}'s saved books!</h1>
+            <h1>Viewing {userData.username}'s saved games!</h1>
           ) : (
-            <h1>Viewing saved books!</h1>
+            <h1>Viewing saved games!</h1>
           )}
         </Container>
       </div>
       <Container>
         <h2 className='pt-5'>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? 'book' : 'books'
+          {userData.savedGames.length
+            ? `Viewing ${userData.savedGames.length} saved ${
+                userData.savedGames.length === 1 ? 'game' : 'games'
               }:`
-            : 'You have no saved books!'}
+            : 'You have no saved games!'}
         </h2>
         <Row>
-          {userData.savedBooks.map((book) => {
+          {userData.savedGames.map((game) => {
             return (
               <Col md='4'>
-                <Card key={book.bookId} border='dark'>
-                  {book.image ? (
+                <Card key={game.gameId} border='dark'>
+                  {game.image ? (
                     <Card.Img
-                      src={book.image}
-                      alt={`The cover for ${book.title}`}
+                      src={game.image}
+                      alt={`The cover for ${game.title}`}
                       variant='top'
                     />
                   ) : null}
                   <Card.Body>
-                    <Card.Title>{book.title}</Card.Title>
-                    <p className='small'>Authors: {book.authors}</p>
-                    <Card.Text>{book.description}</Card.Text>
+                    <Card.Title>{game.title}</Card.Title>
+                    <p className='small'>Released: {game.released}</p>
+                    <Card.Text>{game.floatRating}</Card.Text>
                     <Button
                       className='btn-block btn-danger'
-                      onClick={() => handleDeleteBook(book.bookId)}
+                      onClick={() => handleDeleteGame(game.gameId)}
                     >
-                      Delete this Book!
+                      Delete this Game!
                     </Button>
                   </Card.Body>
                 </Card>
@@ -88,4 +88,4 @@ const SavedBooks = () => {
   );
 };
 
-export default SavedBooks;
+export default SavedGames;
