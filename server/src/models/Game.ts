@@ -27,7 +27,9 @@ const gameSchema = new Schema<GameDocument>({
     {
       _id: mongoose.Schema.Types.ObjectId,
       platform: {
-        name: String,
+        name: {
+          type: String,
+        },
       },
     },
   ],
@@ -38,6 +40,9 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
   },
 });
+
+
+
 
 const Game = model('game', gameSchema);
 
