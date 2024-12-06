@@ -80,7 +80,7 @@ const AppNavbar = () => {
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
               <LogoutIcon />
             </ListItemIcon>
-            <Nav.Link onClick={Auth.logout}>
+            <Nav.Link onClick={Auth.logout} as={Link} to='/'>
               <ListItemText>Logout</ListItemText>
             </Nav.Link>
           </ListItemButton>
