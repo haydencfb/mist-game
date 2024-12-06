@@ -46,14 +46,9 @@ type Game {
 
   type Query {
     me: User
-  }
-
-  type Query {
     getAllGames: [Game!]!
-  }
-
-  type Query {
-    getGame: Game
+    # getGame(_id: ID!): Game
+    getGame(title: String!): Game
   }
 
   type Mutation {
