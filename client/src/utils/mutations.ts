@@ -18,38 +18,38 @@ export const ADD_USER = gql`
             token
             user {
                 _id
-                email
                 username
             }
         }
     }
 `;
 
-export const SAVE_BOOK = gql`
-    mutation saveBook($bookData: BookInput!) {
-        saveBook(bookData: $bookData) {
+export const SAVE_GAME = gql`
+    mutation saveGame($gameData: GameInput!) {
+        saveGame(gameData: $gameData) {
             _id
-            savedBooks {
-                bookId
+            savedGames {
+                gameId
+                title
             }
         }
     }
 `;
 
-export const REMOVE_BOOK = gql`
-    mutation removeBook($bookId: ID!) {
-        removeBook(bookId: $bookId) {
+export const REMOVE_GAME = gql`
+    mutation removeGame($gameId: ID!) {
+        removeGame(gameId: $gameId) {
             _id
-            bookCount
+            gameCount
             email
             username
-            savedBooks {
-                authors
-                bookId
-                description
-                image
-                link
+            savedGames {
+                gameId
                 title
+                released
+                parent_platforms
+                floatRating
+                image
             }
         }
     }

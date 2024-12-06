@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
-import SignUpForm from './SignupForm';
-import LoginForm from './LoginForm';
+import { Nav } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
 
@@ -17,14 +14,12 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import SearchIcon from '@mui/icons-material/Search';
-import LoginIcon from '@mui/icons-material/Login';
 import LogoutIcon from '@mui/icons-material/Logout';
 import MenuIcon from '@mui/icons-material/Menu';
 import ListItemText from '@mui/material/ListItemText';
 
 const AppNavbar = () => {
   // set modal display state
-  const [showModal, setShowModal] = useState(false);
   const [open, setOpen] = React.useState(false);
 
   const toggleDrawer = (newOpen: boolean) => () => {
@@ -41,94 +36,69 @@ const AppNavbar = () => {
       role="presentation" onClick={toggleDrawer(false)}>
       <List>
         <ListItem disablePadding>
-          <ListItemButton sx={{'&:hover': {backgroundColor: '#6c1e23'}}}>
+          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
               <SearchIcon />
             </ListItemIcon>
-            <Nav.Link as={Link} to='/'>
+            <Nav.Link as={Link} to='/search'>
               <ListItemText>Search for Games</ListItemText>
             </Nav.Link>
           </ListItemButton>
         </ListItem>
-        {Auth.loggedIn() ? (
-          <>
-            <ListItem disablePadding>
-              <ListItemButton sx={{'&:hover': {backgroundColor: '#6c1e23'}}}>
-                <ListItemIcon sx={{ color: '#CCCCCC' }}>
-                  <VideogameAssetIcon />
-                </ListItemIcon>
-                <Nav.Link as={Link} to='/saved'>
-                  <ListItemText>See Your Games</ListItemText>
-                </Nav.Link>
-              </ListItemButton>
-            </ListItem>
-            <ListItem disablePadding>
-              <ListItemButton sx={{'&:hover': {backgroundColor: '#6c1e23'}}}>
-                <ListItemIcon sx={{ color: '#CCCCCC' }}>
-                  <LogoutIcon />
-                </ListItemIcon>
-                <Nav.Link onClick={Auth.logout}>
-                  <ListItemText>Logout</ListItemText>
-                </Nav.Link>
-              </ListItemButton>
-            </ListItem>
-          </>
-        ) : (
-          <ListItem disablePadding>
-            <ListItemButton sx={{'&:hover': {backgroundColor: '#6c1e23'}}}>
-              <ListItemIcon sx={{ color: '#CCCCCC' }}>
-                <LoginIcon />
-              </ListItemIcon>
-              <Nav.Link onClick={() => setShowModal(true)}>
-                <ListItemText>Login/Sign Up</ListItemText>
-              </Nav.Link>
-            </ListItemButton>
-          </ListItem>
-        )}
+        <ListItem disablePadding>
+          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
+            <ListItemIcon sx={{ color: '#CCCCCC' }}>
+              <VideogameAssetIcon />
+            </ListItemIcon>
+            <Nav.Link as={Link} to='/wishlist'>
+              <ListItemText>Your Wishlist</ListItemText>
+            </Nav.Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
+            <ListItemIcon sx={{ color: '#CCCCCC' }}>
+              <VideogameAssetIcon />
+            </ListItemIcon>
+            <Nav.Link as={Link} to='/playing'>
+              <ListItemText>Currently Playing</ListItemText>
+            </Nav.Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
+            <ListItemIcon sx={{ color: '#CCCCCC' }}>
+              <VideogameAssetIcon />
+            </ListItemIcon>
+            <Nav.Link as={Link} to='/completed'>
+              <ListItemText>Completed Games</ListItemText>
+            </Nav.Link>
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
+            <ListItemIcon sx={{ color: '#CCCCCC' }}>
+              <LogoutIcon />
+            </ListItemIcon>
+            <Nav.Link onClick={Auth.logout} as={Link} to='/'>
+              <ListItemText>Logout</ListItemText>
+            </Nav.Link>
+          </ListItemButton>
+        </ListItem>
       </List>
-    </Box>
+    </Box >
   );
 
   return (
     <>
-      <div>
-        <Button onClick={toggleDrawer(true)}><MenuIcon /></Button>
+      <Box sx={{backgroundColor: '#49191E'}}>
+        <Button sx={{color: '#FFFFFF', '&:hover': { backgroundColor: '#6c1e23' } }} onClick={toggleDrawer(true)}>
+          <MenuIcon sx={{width: 30, height: 30}}  />
+        </Button>
         <Drawer open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
         </Drawer>
-      </div>
-      {/* set modal data up */}
-      <Modal
-        size='lg'
-        show={showModal}
-        onHide={() => setShowModal(false)}
-        aria-labelledby='signup-modal'>
-        {/* tab container to do either signup or login component */}
-        <Tab.Container defaultActiveKey='login'>
-          <Modal.Header closeButton>
-            <Modal.Title id='signup-modal'>
-              <Nav variant='pills'>
-                <Nav.Item>
-                  <Nav.Link eventKey='login'>Login</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey='signup'>Sign Up</Nav.Link>
-                </Nav.Item>
-              </Nav>
-            </Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <Tab.Content>
-              <Tab.Pane eventKey='login'>
-                <LoginForm handleModalClose={() => setShowModal(false)} />
-              </Tab.Pane>
-              <Tab.Pane eventKey='signup'>
-                <SignUpForm handleModalClose={() => setShowModal(false)} />
-              </Tab.Pane>
-            </Tab.Content>
-          </Modal.Body>
-        </Tab.Container>
-      </Modal>
+      </Box>
     </>
   );
 };
