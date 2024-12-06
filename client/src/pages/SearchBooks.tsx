@@ -5,9 +5,16 @@ import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import type { Book } from '../models/Game';
+import type { Game } from '../models/Game';
 import type { GoogleAPIBook } from '../models/GoogleAPIBook';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
+import GameCard from '../components/GameCard';
+import { CardType } from '../components/GameCard';
+import AppNavbar from '../components/Navbar';
+
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -82,8 +89,31 @@ const SearchBooks = () => {
     }
   };
 
+  // Testing Functions
+  const addToWishlist = () => {
+    console.log('Added to wishlist');
+  };
+
+  const addToPlayingList = () => {
+    console.log('Added to playing list');
+  };
+
+  const addToCompletedList = () => {
+    console.log('Added to completed list');
+  };
+
+  const game1: Game = {
+    title: "test",
+    released: "2000",
+    parent_platforms: ["xbox", "ps3"],
+    floatRating: 4.5,
+    image: "/beach.jpg"
+  }
+  // Testing Functions End
+
   return (
     <>
+      <AppNavbar />
       <div className="text-light bg-dark p-5">
         <Container>
           <h1>Search for Books!</h1>
@@ -108,6 +138,15 @@ const SearchBooks = () => {
           </Form>
         </Container>
       </div>
+
+      <Box sx={{ width: '800px', margin: 'auto' }}>
+        <Stack sx={{ pt: 2 }} spacing={2}>
+          <GameCard game={game1} cardType={CardType.Search} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+          <GameCard game={game1} cardType={CardType.Wish} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+          <GameCard game={game1} cardType={CardType.Playing} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+          <GameCard game={game1} cardType={CardType.Completed} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+        </Stack>
+      </Box>
 
       <Container>
         <h2 className='pt-5'>
