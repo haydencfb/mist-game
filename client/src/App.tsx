@@ -1,8 +1,10 @@
 
 import './App.css';
+import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import LoginForm from './components/LoginForm';
+
+
 
 
 const client = new ApolloClient({
@@ -10,7 +12,7 @@ const client = new ApolloClient({
    cache: new InMemoryCache(),
  });
 
- import Navbar from './components/Navbar';
+import Navbar from './components/Navbar';
 import SearchBooks from './pages/SearchBooks';
 
 
@@ -21,8 +23,6 @@ function App() {
         throw new Error('Function not implemented.');
       } } /> */}
       <Outlet />
-
-
     </ApolloProvider>
   );
 }

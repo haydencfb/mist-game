@@ -1,6 +1,6 @@
 import { Schema, model, type Document } from 'mongoose';
 import bcrypt from 'bcrypt';
-import gameSchema from './Game.js';
+import { gameSchema } from './Game.js';
 import type { GameDocument } from './Game.js';
 
 export interface UserDocument extends Document {
