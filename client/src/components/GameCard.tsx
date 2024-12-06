@@ -37,14 +37,6 @@ interface GameCardProps {
     button3: () => void;
 }
 
-// export interface Game {
-//     title: string;
-//     released: string;
-//     parent_platforms: string[];
-//     floatRating: number;
-//     image: string;
-//   }
-
 const GameCard = ({ game, cardType, button1, button2, button3 }: GameCardProps) => {
 
     const getCardType = () => {
