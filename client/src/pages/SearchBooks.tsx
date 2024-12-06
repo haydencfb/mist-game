@@ -11,6 +11,14 @@ import { SAVE_GAME } from '../utils/mutations';
 import GameCard from '../components/GameCard';
 import { CardType } from '../components/GameCard';
 import AppNavbar from '../components/Navbar';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
+import Paper from '@mui/material/Paper';
+
+
+
+import "../App.css";
 
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
@@ -114,31 +122,50 @@ const SearchGames = () => {
 
   return (
     <>
+    
       <AppNavbar />
-      <div className="text-light bg-dark p-5">
-        <Container>
-          <h1>Search for Games!</h1>
+        <Container style={{display: 'flex', justifyContent: 'center', paddingTop: '25px', paddingBottom: '35px'}} >
+          
+
+          <Paper sx={{ p: '4px', display: 'flex', justifyContent: 'center', alignItems: 'center', width: 650, height: 75, borderRadius: 6, backgroundColor: '#3f3d3d' }}>
+
+          <Paper
+          component="form"
+          sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 600, borderRadius: 3, backgroundColor: 'white' }}
+        >
+
           <Form onSubmit={handleFormSubmit}>
             <Row>
-              <Col xs={12} md={8}>
-                <Form.Control
+            <Col xs={12} md={8}>
+                <InputBase
                   name='searchInput'
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   type='text'
-                  size='lg'
                   placeholder='Search for a game'
+                  sx={{ ml: 1, flex: 1, }}
+                  
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type='submit' variant='success' size='lg'>
-                  Submit Search
-                </Button>
+                <div style={{display: 'flex', paddingLeft: '212px'}}>
+                <IconButton type='submit' sx={{ p: '10px', width: 50, height: 30, borderRadius: 3, backgroundColor: '#8B363E', display: 'flex', justifyContent: 'flex-end' }} aria-label='search'>
+                <SearchIcon sx={{color: 'white', paddingRight: '3px'}} />
+                </IconButton>
+                </div>
               </Col>
             </Row>
           </Form>
+          </Paper>
+      </Paper>
+                     
+          
+          {/* </div> */}
         </Container>
-      </div>
+
+        {/* <SearchBar /> */}
+
+      
 
       <Box sx={{ width: '800px', margin: 'auto' }}>
         <Stack sx={{ pt: 2 }} spacing={2}>
@@ -150,6 +177,7 @@ const SearchGames = () => {
       </Box>
 
       <Container>
+        
         <h2 className='pt-5'>
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results:`
