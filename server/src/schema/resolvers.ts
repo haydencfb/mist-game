@@ -41,7 +41,6 @@ const resolvers = {
             },
 
         addUser: async (_parent: any, args: any): Promise<{ token: string; user: UserDocument }> => {
-
             try {
                 const user = await User.create(args);
                 if (!user) {
