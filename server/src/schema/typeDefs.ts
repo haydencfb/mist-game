@@ -11,7 +11,7 @@ const typeDefs = gql`
     }
 
     type Platform {
-        platform: String
+        name: String
     }
 
     type ParentPlatforms {

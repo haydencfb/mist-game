@@ -21,10 +21,15 @@ export const GET_ME = gql`
 export const GET_ALL_GAMES = gql`
     {
         getAllGames {
-            gameId
+            _id
             title
             released
-            parent_platforms
+            parent_platforms {
+                _id
+                platforms {
+                    name
+                }
+            }
             floatRating
             image
         }
