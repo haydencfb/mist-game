@@ -10,11 +10,20 @@ const typeDefs = gql`
         savedGames: [Game]
     }
 
+    type Platform {
+        platform: String
+    }
+
+    type ParentPlatforms {
+        _id: ID!
+        platforms: [Platform]
+    }
+
     type Game {
         _id: ID!
         title: String!
         released: String
-        parent_platforms: [String]
+        parent_platforms: [ParentPlatforms!]!
         floatRating: Float
         image: String
     }
@@ -38,7 +47,7 @@ const typeDefs = gql`
     }
 
     type Query {
-        getAllGames: Game
+        getAllGames: [Game!]!
     }
 
     type Query {
