@@ -40,7 +40,7 @@ const AppNavbar = () => {
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
               <SearchIcon />
             </ListItemIcon>
-            <Nav.Link as={Link} to='/'>
+            <Nav.Link as={Link} to='/search'>
               <ListItemText>Search for Games</ListItemText>
             </Nav.Link>
           </ListItemButton>
