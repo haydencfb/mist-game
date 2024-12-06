@@ -6,6 +6,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 import '../assets/LoginForm.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const SignupForm = ({}: { handleModalClose: () => void }) => {
@@ -21,6 +22,8 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
   const [showAlert, setShowAlert] = useState(false);
 
   const [addUser, { error }] = useMutation(ADD_USER);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (error) {
@@ -50,6 +53,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
       });
       console.log(data);
       Auth.login(data.addUser.token);
+      navigate('/');
     } catch (err) {
       console.error(err);
     }
