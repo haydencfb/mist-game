@@ -8,6 +8,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -35,6 +36,9 @@ const AppNavbar = () => {
     }}
       role="presentation" onClick={toggleDrawer(false)}>
       <List>
+        <ListItem>
+          <ListItemText><h3>MIST GAMES</h3></ListItemText>
+        </ListItem>
         <ListItem disablePadding>
           <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
@@ -91,9 +95,9 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Box sx={{backgroundColor: '#49191E'}}>
-        <Button sx={{color: '#FFFFFF', '&:hover': { backgroundColor: '#6c1e23' } }} onClick={toggleDrawer(true)}>
-          <MenuIcon sx={{width: 30, height: 30}}  />
+      <Box sx={{ backgroundColor: '#49191E' }}>
+        <Button sx={{ color: '#FFFFFF', '&:hover': { backgroundColor: '#6c1e23' } }} onClick={toggleDrawer(true)}>
+          <MenuIcon sx={{ width: 30, height: 30 }} />
         </Button>
         <Drawer open={open} onClose={toggleDrawer(false)}>
           {DrawerList}
