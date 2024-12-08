@@ -168,14 +168,16 @@ const SearchGames = () => {
 
 
 
-      <Box sx={{ width: '800px', margin: 'auto' }}>
-        <Stack sx={{ pt: 2 }} spacing={2}>
-          <GameCard game={game1} cardType={CardType.Search} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
-          <GameCard game={game1} cardType={CardType.Wish} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
-          <GameCard game={game1} cardType={CardType.Playing} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
-          <GameCard game={game1} cardType={CardType.Completed} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
-        </Stack>
-      </Box>
+      <Card style={{ display: 'flex', margin: 'auto', backgroundColor: '#3f3d3d', width: '810px' }} >
+        <Box sx={{ width: '800px', margin: 'auto' }}>
+          <Stack sx={{ p: 4 }} spacing={2}>
+            <GameCard game={game1} cardType={CardType.Search} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+            <GameCard game={game1} cardType={CardType.Wish} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+            <GameCard game={game1} cardType={CardType.Playing} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+            <GameCard game={game1} cardType={CardType.Completed} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+          </Stack>
+        </Box>
+      </Card>
 
       <Container>
 
