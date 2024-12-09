@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
-import SearchBooks from './pages/SearchBooks';
+import SearchBooks from './pages/SearchGames';
 import Playing from './pages/Playing';
 import Wishlist from './pages/Wishlist';
 import Completed from './pages/Completed';
