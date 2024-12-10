@@ -1,13 +1,13 @@
 // This page allows users to search for games and save them to their profile
 
 // React Imports
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import { useMutation, useLazyQuery } from "@apollo/client";
 import "../App.css";
 
 // Styling Imports
-import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
+import { Container, Col, Form, Row } from "react-bootstrap";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -17,7 +17,7 @@ import Box from "@mui/material/Box";
 
 // Utils Imports
 import Auth from "../utils/auth";
-import { saveGameIds, getSavedGameIds } from "../utils/localStorage";
+import { getSavedGameIds } from "../utils/localStorage";
 import { SAVE_GAME } from "../utils/mutations"; 
 import { GET_GAMES } from "../utils/queries";
 
@@ -44,7 +44,7 @@ const SearchGames = () => {
   const [isCardVisible, setIsCardVisible] = useState(false);
 
   const [game1, setGame1] = useState<Game>({
-    gameId: "",
+    _id: "",
     title: "",
     released: "",
     parent_platforms: [],
@@ -58,9 +58,11 @@ const SearchGames = () => {
       title: searchInput 
     },
     onCompleted: (data) => {
-      console.log(data);
+      // console.log(data);
       if (data && data.getGame) {
-        setGame1(data.getGame);
+        const games = Array.isArray(data.getGame) ? data.getGame : [data.getGame];
+        setSearchedGames(games);
+        setGame1(games[0] || game1); // Set the first game or default
       }
     },
     onError: (error) => {
@@ -68,29 +70,15 @@ const SearchGames = () => {
     },
   });
 
-  // useEffect(() => {
-  //   if (data && data.getGames && data.getGames.length > 0) {
-  //     setGame1(data.getGames[0]);
-  //   }
-  // }, [data]);
-
-  // useEffect(() => {
-  //   if (data && data.searchGames) {
-  //     const gameData = data.searchGames.map((game: Game) => ({
-  //       gameId: game.gameId,
-  //       title: game.title,
-  //       released: game.released,
-  //       parent_platforms: game.parent_platforms,
-  //       floatRating: game.floatRating,
-  //       image: game.image || "",
-  //     }));
-  //     setSearchedGames(gameData);
-  //   }
-  // }, [data]);
-
-  // useEffect(() => {
-  //   return () => saveGameIds(savedGameIds);
-  // }, [savedGameIds]);
+  if (loading) {
+    // console.log("Loading...");
+  }
+  if (data) {
+    // console.log(data);
+  }
+  if (error) {
+    console.error(error);
+  }
 
   // Function to handle the form submission for searching games
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -110,27 +98,50 @@ const SearchGames = () => {
 
   // Function to save a game
   const handleSaveGame = async (gameId: string) => {
-    const gameToSave = searchedGames.find((game) => game.gameId === gameId)!;
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
-
-    if (!token) {
+    console.log("Saving game with ID: ", gameId);
+    const gameToSave: Game | undefined = searchedGames.find((game) => game._id === gameId);
+  
+    if (!gameToSave) {
+      console.error("Game not found in searchedGames");
       return;
     }
+  
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    console.log("User token:", token);
+  
+    if (!token) {
+      console.log("No token found.", error);
+      return false;
+    }
+  
+    // Sanitize the game data to match the GameInput structure
+    const sanitizedGameData = {
+      title: gameToSave.title,
+      released: gameToSave.released,
+      parent_platforms: gameToSave.parent_platforms.map((platform) => ({
+        platform: { name: platform.platform.name },
+      })), // Ensure this matches the GameInput type
+      floatRating: gameToSave.floatRating,
+      image: gameToSave.image,
+    };
+    console.log("Sanitized gameData:", sanitizedGameData);
 
     try {
       await saveGame({
-        variables: { gameData: { ...gameToSave } },
+        variables: { gameData: sanitizedGameData },
       });
-
-      setSavedGameIds([...savedGameIds, gameToSave.gameId]);
-    } catch (err) {
-      console.error(err);
+  
+      setSavedGameIds([...savedGameIds, gameToSave._id]);
+      savedGameIds.push(gameToSave._id);
+    } catch (err: any) {
+      console.error(err.message);
     }
   };
 
   // Function to add a game to the wishlist
   const addToWishlist = () => {
     console.log("Added to wishlist");
+    handleSaveGame(game1._id);
   };
 
   // Function to add a game to the playing list
@@ -239,7 +250,7 @@ const SearchGames = () => {
   </Stack>
 </Box>
 
-      <Container>
+      {/* <Container>
         <h2 className="pt-5">
           {searchedGames.length
             ? `Viewing ${searchedGames.length} results:`
@@ -283,7 +294,7 @@ const SearchGames = () => {
             </Col>
           ))}
         </Row>
-      </Container>
+      </Container> */}
     </>
   );
 };

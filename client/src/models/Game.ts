@@ -1,8 +1,10 @@
+import { ParentPlatforms } from './ParentPlatforms';
+
 export interface Game {
-  gameId: string;
+  _id: string;
   title: string;
   released: string;
-  parent_platforms: string[];
+  parent_platforms: ParentPlatforms[];
   floatRating: number;
   image: string;
 }

@@ -25,7 +25,7 @@ const resolvers = {
 
             try {
                 const games = await Game.find();
-                games.forEach(game => console.log("Parent Platforms:", game.parent_platforms));
+                // games.forEach(game => console.log("Parent Platforms:", game.parent_platforms));
                 return games;
             } catch (err) {
                 throw new AuthenticationError("GetAllGames Failed");
@@ -80,25 +80,34 @@ const resolvers = {
 
         },
 
-        saveGame: async (_parent: any, { gameData }: { gameData: GameDocument }, context: UserDocument): Promise<UserDocument | null> => {
-
-            try {
-                if (!context) {
-                    throw new AuthenticationError('You need to be logged in!');
-                }
-
-                const updatedUser = await User.findByIdAndUpdate(
-                    context._id,
-                    { $addToSet: { savedGames: gameData } },
-                    { new: true }
-                );
-
-                return updatedUser;
-            } catch (err) {
-                throw new AuthenticationError('SaveGame failed');
+        saveGame: async (_parent: any, { gameData }: { gameData: GameDocument }, context: UserContext): Promise<UserDocument | null> => {
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in!');
             }
-            
-        }, 
+        
+            // Transform gameData to match the schema
+            const transformedGameData = {
+                ...gameData,
+                parent_platforms: gameData.parent_platforms.map((platform: any) => ({
+                    platform: {
+                        name: platform.platform.name,
+                    },
+                })),
+            };
+        
+            try {
+                const updatedUser = await User.findByIdAndUpdate(
+                    context.user._id,
+                    { $push: { savedGames: transformedGameData } },
+                    { new: true, runValidators: true }
+                );
+        
+                return updatedUser;
+            } catch (err: any) {
+                console.error(err.message);
+                throw new Error('Failed to save game');
+            }
+        },
 
         removeGame: async (_parent: any, { gameId }: { gameId: GameDocument }, context: UserDocument): Promise<UserDocument | null> => {
 
