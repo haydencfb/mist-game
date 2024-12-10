@@ -240,6 +240,7 @@ const SearchGames = () => {
               <Card border="dark">
                 {game.image && (
                   <Card.Img
+                    
                     src={game.image}
                     alt={`The cover for ${game.title}`}
                     variant="top"
