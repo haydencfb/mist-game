@@ -40,6 +40,9 @@ const SearchGames = () => {
   // useState for the search input (User Input in the Search Form)
   const [searchInput, setSearchInput] = useState("");
 
+  // useState for the visibility of the card
+  const [isCardVisible, setIsCardVisible] = useState(false);
+
   const [game1, setGame1] = useState<Game>({
     gameId: "",
     title: "",
@@ -98,7 +101,8 @@ const SearchGames = () => {
     }
 
     try {
-      searchGames();
+      await searchGames();
+      setIsCardVisible(true);
     } catch (err) {
       console.error(err);
     }
@@ -222,16 +226,18 @@ const SearchGames = () => {
       </Container>
 
       <Box sx={{ width: "800px", margin: "auto" }}>
-        <Stack sx={{ pt: 2 }} spacing={2}>
-          <GameCard
-            game={game1}
-            cardType={CardType.Search}
-            button1={addToWishlist}
-            button2={addToPlayingList}
-            button3={addToCompletedList}
-          />
-        </Stack>
-      </Box>
+  <Stack sx={{ pt: 2 }} spacing={2}>
+    {isCardVisible && (
+      <GameCard
+        game={game1}
+        cardType={CardType.Search}
+        button1={addToWishlist}
+        button2={addToPlayingList}
+        button3={addToCompletedList}
+      />
+    )}
+  </Stack>
+</Box>
 
       <Container>
         <h2 className="pt-5">
