@@ -8,6 +8,7 @@ import cors from 'cors'; // Import the CORS package
 
 import { authenticateToken } from './services/auth-service.js';
 
+
 // Set up dynamic allowed origins (localhost for dev and Render for production)
 const allowedOrigins = [
   'http://localhost:3000', // Local development
