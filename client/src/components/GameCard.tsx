@@ -109,15 +109,16 @@ const GameCard = ({
         alignItems: "center",
         backgroundColor: "#49191E",
         color: "#FFFFFF",
+        borderRadius: 4,
       }}
     >
       <CardMedia
         component="img"
-        sx={{ height: 195, width: 195 }}
+        sx={{ height: 225, maxHeight: 600, maxWidth: 250, objectFit: 'cover', borderRadius: 4 }}
         image={game.image}
         alt="Game cover"
       />
-      <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
+      <Box sx={{ display: "flex", flexDirection: "column", flex: 1}}>
         <CardContent sx={{ flex: "1 0 auto" }}>
           <Typography component="div" variant="h4">
             <strong>{game.title}</strong>
