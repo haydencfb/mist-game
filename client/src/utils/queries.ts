@@ -1,26 +1,23 @@
 import { gql } from "@apollo/client";
 
 export const GET_ME = gql`
-  {
+  query GET_ME {
     me {
       _id
       username
       email
-      password
       savedGames {
         _id
         title
+        floatRating
+        image
         released
         parent_platforms {
-          _id
           platform {
             name
           }
         }
-        floatRating
-        image
       }
-      gameCount
     }
   }
 `;
