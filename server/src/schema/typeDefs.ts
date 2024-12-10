@@ -16,7 +16,6 @@ const typeDefs = gql`
 }
 
 type ParentPlatforms {
-  _id: ID!
   platform: Platform
 }
 
@@ -24,7 +23,7 @@ type Game {
   _id: ID!
   title: String!
   released: String
-  parent_platforms: [ParentPlatforms!]!
+  parent_platforms: [ParentPlatforms]
   floatRating: Float
   image: String
 }
@@ -35,19 +34,25 @@ type Game {
     user: User
   }
 
+  input PlatformInput {
+    name: String
+  }
+
+  input ParentPlatformsInput {
+      platform: PlatformInput
+  }
+
   input GameInput {
-    _id: ID!
-    title: String!
-    released: String
-    parent_platforms: [String]
-    floatRating: Float
-    image: String
+      title: String!
+      released: String
+      parent_platforms: [ParentPlatformsInput!]!
+      floatRating: Float
+      image: String
   }
 
   type Query {
     me: User
     getAllGames: [Game!]!
-    # getGame(_id: ID!): Game
     getGame(title: String!): Game
   }
 

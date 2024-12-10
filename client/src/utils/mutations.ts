@@ -28,9 +28,19 @@ export const SAVE_GAME = gql`
     mutation saveGame($gameData: GameInput!) {
         saveGame(gameData: $gameData) {
             _id
+            username
+            email
             savedGames {
-                gameId
+                _id
                 title
+                released
+                floatRating
+                image
+                parent_platforms {
+                    platform {
+                    name
+                    }
+                }
             }
         }
     }
@@ -51,20 +61,6 @@ export const REMOVE_GAME = gql`
                 floatRating
                 image
             }
-        }
-    }
-`;
-
-
-export const SEARCH_GAMES = gql`
-    query searchGames($query: String!) {
-        searchGames(query: $query) {
-            gameId
-            title
-            released
-            parent_platforms
-            floatRating
-            image
         }
     }
 `;

@@ -32,7 +32,6 @@ export const GET_GAMES = gql`
     title
     released
     parent_platforms {
-      _id
       platform {
         name
       }

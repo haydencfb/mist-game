@@ -43,7 +43,7 @@ const GameCard = ({
   button2,
   button3,
 }: GameCardProps) => {
-  console.log("GameCard received game:", game);
+  // console.log("GameCard received game:", game);
 
   if (!game) {
     return <p>No game data available</p>;
