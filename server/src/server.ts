@@ -6,7 +6,7 @@ import { ApolloServer } from '@apollo/server';
 import { expressMiddleware } from '@apollo/server/express4';
 import { typeDefs, resolvers } from './schema/index.js';
 import { fileURLToPath } from 'node:url';
-import cors from 'cors'; // Import the CORS package
+import cors from 'cors'; 
 
 import { authenticateToken } from './services/auth-service.js';
 
