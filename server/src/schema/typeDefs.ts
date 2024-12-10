@@ -60,7 +60,7 @@ type Game {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     saveGame(gameData: GameInput!): User
-    removeGame(_id: ID!): User
+    removeGame(gameId: ID!): Game
   }
 `;
 

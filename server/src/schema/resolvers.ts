@@ -115,11 +115,10 @@ const resolvers = {
             }
         
             try {
-                // Ensure we're pulling by game ID within the array
                 const updatedUser = await User.findByIdAndUpdate(
-                    context.user._id, // Use context.user._id
-                    { $pull: { savedGames: { _id: gameId } } }, // Pull the object with matching _id
-                    { new: true } // Return the updated document
+                    { _id: context.user._id },
+                    { $pull: { savedGames: { _id: gameId } } },
+                    { new: true }
                 );
         
                 if (!updatedUser) {
