@@ -56,8 +56,8 @@ const SearchGames = () => {
     },
     onCompleted: (data) => {
       console.log(data);
-      if (data && data.getGames && data.getGames.length > 0) {
-        setGame1(data.getGames[0]);
+      if (data && data.getGame) {
+        setGame1(data.getGame);
       }
     },
     onError: (error) => {
@@ -65,11 +65,11 @@ const SearchGames = () => {
     },
   });
 
-  useEffect(() => {
-    if (data && data.getGames && data.getGames.length > 0) {
-      setGame1(data.getGames[0]);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && data.getGames && data.getGames.length > 0) {
+  //     setGame1(data.getGames[0]);
+  //   }
+  // }, [data]);
 
   // useEffect(() => {
   //   if (data && data.searchGames) {
