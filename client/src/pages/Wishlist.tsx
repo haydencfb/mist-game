@@ -18,10 +18,6 @@ const Wishlist = () => {
     const {loading, data} = useQuery(GET_ME);
     const [removeGame] = useMutation(REMOVE_GAME);
 
-    /*const handleDeleteGame = async (gameId: string) => {
-
-    }*/
-
     if (loading) {
         return <h2>LOADING...</h2>;
     }
@@ -39,18 +35,9 @@ const Wishlist = () => {
         console.log('Added to completed list');
     };
 
-    // const game1: Game = {
-    //     _id: "1",
-    //     title: "test",
-    //     released: "2000",
-    //     parent_platforms: [],
-    //     floatRating: 4.5,
-    //     image: "/beach.jpg"
-    // }
-
     const handleDeleteGame = async (gameId: string) => {
-
       console.log("Removing game with ID: ", gameId);
+
       const gameToRemove = userData.savedGames?.find((game: Game) => game._id === gameId);
       console.log("Game to remove:", gameToRemove);
 
@@ -68,10 +55,11 @@ const Wishlist = () => {
       }
   
       try {
-        await removeGame({
-          variables: { id: gameId },
+        const { data } = await removeGame({
+          variables: { gameId },
         });
-        console.log("Game removed from wishlist.");
+
+        console.log("Game removed from wishlist:", data);
       } catch (err) {
         console.error(err);
       }
@@ -83,7 +71,7 @@ const Wishlist = () => {
     //         <Card style={{ display: 'flex', margin: 'auto', backgroundColor: '#3f3d3d', width: '810px'}} >
     //                     <Box sx={{ width: '800px', margin: 'auto' }}>
     //                         <Stack sx={{ p: 4 }} spacing={2}>
-    //                             <GameCard game={game1} cardType={CardType.Search} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
+    //                             <GameCard game={userData.savedGames[0]} cardType={CardType.Search} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
     //                             <GameCard game={game1} cardType={CardType.Wish} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
     //                             <GameCard game={game1} cardType={CardType.Playing} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
     //                             <GameCard game={game1} cardType={CardType.Completed} button1={addToWishlist} button2={addToPlayingList} button3={addToCompletedList} />
