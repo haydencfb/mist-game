@@ -7,7 +7,7 @@ import Game from "../models/Game.js";
 
 const resolvers = {
     Query: {
-        me: async (context: UserContext): Promise<UserDocument | null> => {
+        me: async (_parent: any, _args: any, context: UserContext): Promise<UserDocument | null> => {
 
             try {
                 if (context.user) {
@@ -109,20 +109,28 @@ const resolvers = {
             }
         },
 
-        removeGame: async (_parent: any, { gameId }: { gameId: GameDocument }, context: UserDocument): Promise<UserDocument | null> => {
-
-            try {
-                const updatedUser = await User.findByIdAndUpdate(
-                    context._id,
-                    { $pull: { savedGames: gameId } },
-                    { new: true }
-                );
-
-                return updatedUser;
-            } catch (err) {
-                throw new AuthenticationError('RemoveGame failed');
+        removeGame: async (_parent: any, { gameId }: { gameId: string }, context: UserContext): Promise<UserDocument | null> => {
+            if (!context.user) {
+                throw new AuthenticationError('You need to be logged in!');
             }
-
+        
+            try {
+                // Ensure we're pulling by game ID within the array
+                const updatedUser = await User.findByIdAndUpdate(
+                    context.user._id, // Use context.user._id
+                    { $pull: { savedGames: { _id: gameId } } }, // Pull the object with matching _id
+                    { new: true } // Return the updated document
+                );
+        
+                if (!updatedUser) {
+                    throw new Error('User not found');
+                }
+        
+                return updatedUser;
+            } catch (err: any) {
+                console.error('Error in removeGame resolver:', err.message);
+                throw new Error('Failed to remove game');
+            }
         }
     }
 }

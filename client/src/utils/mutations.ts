@@ -47,19 +47,22 @@ export const SAVE_GAME = gql`
 `;
 
 export const REMOVE_GAME = gql`
-    mutation removeGame($gameId: ID!) {
-        removeGame(gameId: $gameId) {
+    mutation removeGame($id: ID!) {
+        removeGame(_id: $id) {
             _id
-            gameCount
-            email
             username
+            email
             savedGames {
-                gameId
+                _id
                 title
                 released
-                parent_platforms
                 floatRating
                 image
+                parent_platforms {
+                    platform {
+                        name
+                    }
+                }
             }
         }
     }

@@ -22,9 +22,9 @@ const Wishlist = () => {
 
     }*/
 
-    /*if (loading) {
+    if (loading) {
         return <h2>LOADING...</h2>;
-    }*/
+    }
     const userData: User = data?.me || {};
 
     const addToWishlist = () => {
@@ -39,32 +39,42 @@ const Wishlist = () => {
         console.log('Added to completed list');
     };
 
-    const game1: Game = {
-        gameId: "1",
-        title: "test",
-        released: "2000",
-        parent_platforms: [],
-        floatRating: 4.5,
-        image: "/beach.jpg"
-    }
+    // const game1: Game = {
+    //     _id: "1",
+    //     title: "test",
+    //     released: "2000",
+    //     parent_platforms: [],
+    //     floatRating: 4.5,
+    //     image: "/beach.jpg"
+    // }
 
     const handleDeleteGame = async (gameId: string) => {
-        // get token
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
-    
-        if (!token) {
-          return false;
-        }
-    
-        try {
-          await removeGame({
-            variables: { gameId },
-          });
-    
-          // upon success, you can add any additional logic here
-        } catch (err) {
-          console.error(err);
-        }
+
+      console.log("Removing game with ID: ", gameId);
+      const gameToRemove = userData.savedGames?.find((game: Game) => game._id === gameId);
+      console.log("Game to remove:", gameToRemove);
+
+      if (!gameToRemove) {
+        console.log("Game not found in saved games.");
+        return false;
+      }
+
+      const token = Auth.loggedIn() ? Auth.getToken() : null;
+      console.log("User Token:", token);
+
+      if (!token) {
+        console.log("No token found.");
+        return false;
+      }
+  
+      try {
+        await removeGame({
+          variables: { id: gameId },
+        });
+        console.log("Game removed from wishlist.");
+      } catch (err) {
+        console.error(err);
+      }
 
     // return (
     //     <>
@@ -88,22 +98,22 @@ const Wishlist = () => {
         <>
           <div className="text-light bg-dark p-5">
             <Container>
-              {/* <h1>Viewing {userData.username}'s books!</h1> */}
+              <h1>Viewing {userData.username}'s games!</h1>
             </Container>
           </div>
           <Container>
             <h2 className='pt-5'>
               {userData.savedGames?.length
-                ? `Viewing ${userData.savedGames.length} saved ${userData.savedGames.length === 1 ? 'book' : 'books'
+                ? `Viewing ${userData.savedGames.length} saved ${userData.savedGames.length === 1 ? 'game' : 'games'
                 }:`
-                : 'You have no saved books!'}
+                : 'You have no saved games!'}
             </h2>
             <div>
               <Row>
                 {userData.savedGames?.map((game: Game) => {
                   return (
                     <Col md="4">
-                      <Card key={game.gameId} component="div">
+                      <Card key={game._id} component="div">
                         {game.image ? (
                           <img
                             src={game.image}
@@ -114,10 +124,10 @@ const Wishlist = () => {
                         <CardContent>
                           <Typography variant="h5" component="div">{game.title}</Typography>
                           <p className="small">Released: {game.released}</p>
-                          <Typography>No description available</Typography>
+                          <Typography>{game.parent_platforms.map(platform => platform.platform.name).join(', ')}</Typography>
                           <Button
                             className="btn-block btn-danger"
-                            onClick={() => handleDeleteGame(game.gameId)}
+                            onClick={() => handleDeleteGame(game._id)}
                           >
                             Delete this game!
                           </Button>
