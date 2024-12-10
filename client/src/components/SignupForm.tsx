@@ -67,7 +67,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
   return (
     <>
-    <div className="signup-form-container">
+    <div className="signup-form-container w-50">
       <h2 className="signup-form-title">Signup</h2>
       {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
