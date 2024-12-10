@@ -26,42 +26,36 @@ export const GET_ME = gql`
 `;
 
 export const GET_GAMES = gql`
-  query getGames($searchTerm: String!) {
-    getGames(searchTerm: $searchTerm) {
-      gameId
-      title
-      released
-      parent_platforms
-      floatRating
-      image
+  query getGames($title: String!) {
+  getGame(title: $title) {
+    _id
+    title
+    released
+    parent_platforms {
+      _id
+      platform {
+        name
+      }
     }
+    floatRating
+    image
   }
+}
 `;
 
 // Query to fetch all games
 export const GET_ALL_GAMES = gql`
-  query GetAllGames {
-    games {
-      gameId
+  query GET_ALL_GAMES {
+    getAllGames {
+      _id
       title
       released
-      parentPlatforms
-      floatRating
-      image
-    }
-  }
-`;
-// src/graphql/queries.js
-
-
-
-export const SEARCH_GAMES = gql`
-  query searchGames($query: String!) {
-    searchGames(query: $query) {
-      gameId
-      title
-      released
-      parent_platforms
+      parent_platforms {
+        _id
+        platform {
+          name
+        }
+      }
       floatRating
       image
     }
