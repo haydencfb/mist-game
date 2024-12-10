@@ -182,11 +182,17 @@ const SearchGames = () => {
                       onChange={(e) => setSearchInput(e.target.value)}
                       type="text"
                       placeholder="Search for a game"
-                      sx={{ ml: 1, flex: 1 }}
+                      sx={{ ml: 1, 
+                        flex: 1, 
+                        width: 500, 
+                        '&:focus': {
+                          outline: 'none'
+                        },
+                       }}
                     />
                   </Col>
                   <Col xs={12} md={4}>
-                    <div style={{ display: "flex", paddingLeft: "212px" }}>
+                    <div style={{ display: "flex", paddingLeft: "130px" }}>
                       <IconButton
                         type="submit"
                         onClick={() => searchGames({ variables: { title: searchInput } })}
@@ -198,6 +204,7 @@ const SearchGames = () => {
                           backgroundColor: "#8B363E",
                           display: "flex",
                           justifyContent: "flex-end",
+
                         }}
                         aria-label="search"
                       >
