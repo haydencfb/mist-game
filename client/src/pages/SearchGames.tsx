@@ -18,7 +18,7 @@ import Box from "@mui/material/Box";
 // Utils Imports
 import Auth from "../utils/auth";
 import { getSavedGameIds } from "../utils/localStorage";
-import { SAVE_GAME } from "../utils/mutations"; 
+import { SAVE_GAME } from "../utils/mutations";
 import { GET_GAMES } from "../utils/queries";
 
 // Model Imports
@@ -54,8 +54,8 @@ const SearchGames = () => {
 
   // Lazy query for searching games
   const [searchGames, { loading, data, error }] = useLazyQuery(GET_GAMES, {
-    variables: { 
-      title: searchInput 
+    variables: {
+      title: searchInput
     },
     onCompleted: (data) => {
       // console.log(data);
@@ -100,20 +100,20 @@ const SearchGames = () => {
   const handleSaveGame = async (gameId: string) => {
     console.log("Saving game with ID: ", gameId);
     const gameToSave: Game | undefined = searchedGames.find((game) => game._id === gameId);
-  
+
     if (!gameToSave) {
       console.error("Game not found in searchedGames");
       return;
     }
-  
+
     const token = Auth.loggedIn() ? Auth.getToken() : null;
     console.log("User token:", token);
-  
+
     if (!token) {
       console.log("No token found.", error);
       return false;
     }
-  
+
     // Sanitize the game data to match the GameInput structure
     const sanitizedGameData = {
       title: gameToSave.title,
@@ -130,7 +130,7 @@ const SearchGames = () => {
       await saveGame({
         variables: { gameData: sanitizedGameData },
       });
-  
+
       setSavedGameIds([...savedGameIds, gameToSave._id]);
       savedGameIds.push(gameToSave._id);
     } catch (err: any) {
@@ -171,8 +171,9 @@ const SearchGames = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            width: 650,
-            height: 75,
+            width: "100%",
+            height: 60,
+            maxWidth: 700,
             borderRadius: 6,
             backgroundColor: "#3f3d3d",
           }}
@@ -182,73 +183,64 @@ const SearchGames = () => {
               p: "2px 4px",
               display: "flex",
               alignItems: "center",
-              width: 600,
+              justifyContent: "space-between",
+              width: "100%",
+              height: 40,
+              maxWidth: 675,
               borderRadius: 3,
               backgroundColor: "white",
             }}
           >
-            <div>
-              <Form onSubmit={handleFormSubmit}>
-                <Row>
-                  <Col xs={12} md={8}>
-                    <InputBase
-                      name="searchInput"
-                      value={searchInput}
-                      onChange={(e) => setSearchInput(e.target.value)}
-                      type="text"
-                      placeholder="Search for a game"
-                      sx={{ ml: 1, 
-                        flex: 1, 
-                        width: 500, 
-                        '&:focus': {
-                          outline: 'none'
-                        },
-                       }}
-                    />
-                  </Col>
-                  <Col xs={12} md={4}>
-                    <div style={{ display: "flex", paddingLeft: "130px" }}>
-                      <IconButton
-                        type="submit"
-                        onClick={() => searchGames({ variables: { title: searchInput } })}
-                        sx={{
-                          p: "10px",
-                          width: 50,
-                          height: 30,
-                          borderRadius: 3,
-                          backgroundColor: "#8B363E",
-                          display: "flex",
-                          justifyContent: "flex-end",
-
-                        }}
-                        aria-label="search"
-                      >
-                        <SearchIcon
-                          sx={{ color: "white", paddingRight: "3px" }}
-                        />
-                      </IconButton>
-                    </div>
-                  </Col>
-                </Row>
-              </Form>
-            </div>
+            <Form onSubmit={handleFormSubmit} style={{ display: "flex", width: "100%" }}>
+              <InputBase
+                name="searchInput"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                type="text"
+                placeholder="Search for a game"
+                sx={{
+                  flex: 1, // Use flex to make the input take available space
+                  ml: 1,
+                  "&:focus": {
+                    outline: "none",
+                  },
+                }}
+              />
+              <IconButton
+                type="submit"
+                onClick={() => searchGames({ variables: { title: searchInput } })}
+                sx={{
+                  p: "10px",
+                  borderRadius: 3,
+                  backgroundColor: "#8B363E",
+                  color: "white",
+                  height: 30,
+                  "&:hover": {
+                    backgroundColor: "#a5424d",
+                  },
+                }}
+                aria-label="search"
+              >
+                <SearchIcon />
+              </IconButton>
+            </Form>
           </Paper>
         </Paper>
       </Container>
 
-      <Box sx={{ width: "800px", margin: "auto" }}>
-  <Stack sx={{ pt: 2 }} spacing={2}>
-    {isCardVisible && (
-      <GameCard
-        game={game1}
-        cardType={CardType.Search}
-        button1={addToWishlist}
-        button2={addToPlayingList}
-        button3={addToCompletedList}
-      />
-    )}
-  </Stack>
-</Box>
+      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+        <Stack sx={{ pt: 2 }} spacing={2}>
+          {isCardVisible && (
+            <GameCard
+              game={game1}
+              cardType={CardType.Search}
+              button1={addToWishlist}
+              button2={addToPlayingList}
+              button3={addToCompletedList}
+            />
+          )}
+        </Stack>
+      </Box>
 
       {/* <Container>
         <h2 className="pt-5">
