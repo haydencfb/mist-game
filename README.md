@@ -19,14 +19,14 @@ Welcome to our Full-Stack Project! The application allows users to search for a 
 ## Installation
 
 ```
-git clone https://github.com/haydencfb/Stock-Project.git
+git clone https://github.com/haydencfb/mist-game
 ```
 ```
 npm install
 ```
 
 ```
-npm run start:dev
+npm run build -> npm run develop
 ```
 
 ## Screenshot
@@ -35,19 +35,15 @@ npm run start:dev
 
 ## Link To Deployment:
 
-https://stock-project-mo4x.onrender.com
-
-## Login
-
-Username: HaydenFB
-Password: password
+https://mist-game.onrender.com/
 
 ## Contributors
 
 [Hayden Fitzpatrick-Brintle](https://github.com/haydencfb)
 
+[Isaiah SKidmore](https://github.com/IsaiahSkidmore)
+
+[Daniel Olaes](https://github.com/dolaes)
+
 [John Marquez](https://github.com/jvhnn)
 
-[John Dinh](https://github.com/jandgdinh)
-
-[Brian Petros](https://github.com/brianleepetros)
