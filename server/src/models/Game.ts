@@ -24,11 +24,14 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
   },
   parent_platforms: [
-    { 
+    {
+      // _id: mongoose.Schema.Types.ObjectId,
       platform: {
-        name: String, 
-      } 
-    }
+        name: {
+          type: String,
+        },
+      },
+    },
   ],
   floatRating: {
     type: Number,
@@ -37,6 +40,9 @@ const gameSchema = new Schema<GameDocument>({
     type: String,
   },
 });
+
+
+
 
 const Game = model('game', gameSchema);
 

@@ -54,3 +54,18 @@ export const REMOVE_GAME = gql`
         }
     }
 `;
+
+
+export const SEARCH_GAMES = gql`
+    query searchGames($query: String!) {
+        searchGames(query: $query) {
+            gameId
+            title
+            released
+            parent_platforms
+            floatRating
+            image
+        }
+    }
+`;
+
