@@ -11,6 +11,7 @@ import Box from "@mui/material/Box";
 import PlaylistRemoveIcon from "@mui/icons-material/PlaylistRemove";
 import type { User } from "../models/User";
 import Auth from "../utils/auth";
+import AppNavbar from '../components/Navbar';
 
 const Wishlist = () => {
   const { loading, data, error, refetch } = useQuery(GET_ME);
@@ -74,6 +75,7 @@ const Wishlist = () => {
 
   return (
     <>
+      <AppNavbar />
       <div className="text-light bg-dark p-5">
         <Container
           style={{
