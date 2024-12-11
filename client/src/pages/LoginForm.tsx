@@ -5,12 +5,9 @@ import { useMutation } from '@apollo/client';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
-// import type { User } from '../models/User';
 import { LOGIN_USER } from '../utils/mutations';
-// import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
 import { Typography } from '@mui/material';
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({

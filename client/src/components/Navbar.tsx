@@ -58,26 +58,6 @@ const AppNavbar = () => {
             </Nav.Link>
           </ListItemButton>
         </ListItem>
-        {/* <ListItem disablePadding>
-          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
-            <ListItemIcon sx={{ color: '#CCCCCC' }}>
-              <VideogameAssetIcon />
-            </ListItemIcon>
-            <Nav.Link as={Link} to='/playing'>
-              <ListItemText>Currently Playing</ListItemText>
-            </Nav.Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
-            <ListItemIcon sx={{ color: '#CCCCCC' }}>
-              <VideogameAssetIcon />
-            </ListItemIcon>
-            <Nav.Link as={Link} to='/completed'>
-              <ListItemText>Completed Games</ListItemText>
-            </Nav.Link>
-          </ListItemButton>
-        </ListItem> */}
         <ListItem disablePadding>
           <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
