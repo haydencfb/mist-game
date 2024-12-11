@@ -51,6 +51,67 @@ const SearchGames = () => {
     image: "",
   });
 
+  const sampleGame: Game = {
+    _id: "1",
+    title: "The Legend of Zelda: Breath of the Wild",
+    released: "2017-03-03",
+    parent_platforms: [
+      {
+        _id: 1,
+        platform: {
+          name: "Nintendo Switch",
+        },
+      },
+    ],
+    floatRating: 97,
+    image: "../../public/zelda.webp"
+  };
+
+  const sampleGame2: Game = {
+    _id: "2",
+    title: "Grand Theft Auto V",
+    released: "2013-09-17",
+    parent_platforms: [
+      {
+        _id: 1,
+        platform: {
+          name: "PC",
+        },
+      },
+      {
+        _id: 2,
+        platform: {
+          name: "PlayStation",
+        },
+      },
+      {
+        _id: 3,
+        platform: {
+          name: "Xbox",
+        },
+      },
+    ],
+    floatRating: 4.9,
+    image: "../../public/gta.png"
+  };
+
+  const sampleGame3: Game = {
+    _id: "3",
+    title: "Counter-Strike: Global Offensive",
+    released: "2012-08-21",
+    parent_platforms: [
+      {
+        _id: 1,
+        platform: {
+          name: "PC",
+        },
+      },
+    ],
+    floatRating: 4.5,
+    image: "../../public/csgo.jpg"
+  };
+
+
   // Lazy query for searching games
   const [searchGames, { loading, data, error }] = useLazyQuery(GET_GAMES, {
     variables: {
@@ -239,6 +300,52 @@ const SearchGames = () => {
               button3={addToCompletedList}
             />
           )}
+        </Stack>
+      </Box>
+
+      <Container
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              paddingTop: "25px",
+              paddingBottom: "35px",
+            }}>
+              <h1>Today's Biggest Hits!</h1>
+            </Container>
+
+      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+        <Stack sx={{ pt: 2 }} spacing={2}>
+            <GameCard
+              game={sampleGame}
+              cardType={CardType.Search}
+              button1={addToWishlist}
+              button2={addToPlayingList}
+              button3={addToCompletedList}
+            />
+        </Stack>
+      </Box>
+
+      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+        <Stack sx={{ pt: 2 }} spacing={2}>
+            <GameCard
+              game={sampleGame2}
+              cardType={CardType.Search}
+              button1={addToWishlist}
+              button2={addToPlayingList}
+              button3={addToCompletedList}
+            />
+        </Stack>
+      </Box>
+
+      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+        <Stack sx={{ pt: 2 }} spacing={2}>
+            <GameCard
+              game={sampleGame3}
+              cardType={CardType.Search}
+              button1={addToWishlist}
+              button2={addToPlayingList}
+              button3={addToCompletedList}
+            />
         </Stack>
       </Box>
     </>
