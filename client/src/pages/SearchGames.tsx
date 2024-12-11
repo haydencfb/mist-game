@@ -20,8 +20,6 @@ import Auth from "../utils/auth";
 import { getSavedGameIds } from "../utils/localStorage";
 import { SAVE_GAME } from "../utils/mutations";
 import { GET_GAMES } from "../utils/queries";
-import type { User } from '../models/User';
-import { GET_ME } from '../utils/queries';
 
 // Model Imports
 import type { Game } from "../models/Game";
@@ -59,7 +57,6 @@ const SearchGames = () => {
       title: searchInput
     },
     onCompleted: (data) => {
-      // console.log(data);
       if (data && data.getGame) {
         const games = Array.isArray(data.getGame) ? data.getGame : [data.getGame];
         setSearchedGames(games);
@@ -72,10 +69,8 @@ const SearchGames = () => {
   });
 
   if (loading) {
-    // console.log("Loading...");
   }
   if (data) {
-    // console.log(data);
   }
   if (error) {
     console.error(error);
@@ -99,7 +94,6 @@ const SearchGames = () => {
 
   // Function to save a game
   const handleSaveGame = async (gameId: string) => {
-    console.log("Saving game with ID: ", gameId);
     const gameToSave: Game | undefined = searchedGames.find((game) => game._id === gameId);
 
     if (!gameToSave) {
@@ -108,10 +102,8 @@ const SearchGames = () => {
     }
 
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-    console.log("User token:", token);
 
     if (!token) {
-      console.log("No token found.", error);
       return false;
     }
 
@@ -125,7 +117,6 @@ const SearchGames = () => {
       floatRating: gameToSave.floatRating,
       image: gameToSave.image,
     };
-    console.log("Sanitized gameData:", sanitizedGameData);
 
     try {
       await saveGame({
@@ -141,18 +132,15 @@ const SearchGames = () => {
 
   // Function to add a game to the wishlist
   const addToWishlist = () => {
-    console.log("Added to wishlist");
     handleSaveGame(game1._id);
   };
 
   // Function to add a game to the playing list
   const addToPlayingList = () => {
-    console.log("Added to playing list");
   };
 
   // Function to add a game to the completed list
   const addToCompletedList = () => {
-    console.log("Added to completed list");
   };
 
   const profile = Auth.getProfile() as { data: { username: string } };
@@ -253,52 +241,6 @@ const SearchGames = () => {
           )}
         </Stack>
       </Box>
-
-      {/* <Container>
-        <h2 className="pt-5">
-          {searchedGames.length
-            ? `Viewing ${searchedGames.length} results:`
-            : "Search for a game to begin"}
-        </h2>
-        <Row>
-          {loading && <p>Loading...</p>}
-          {error && <p>Error fetching data!</p>}
-          {searchedGames.map((game) => (
-            <Col md="4" key={game.gameId}>
-              <Card border="dark">
-                {game.image && (
-                  <Card.Img
-                    
-                    src={game.image}
-                    alt={`The cover for ${game.title}`}
-                    variant="top"
-                  />
-                )}
-                <Card.Body>
-                  <Card.Title>{game.title}</Card.Title>
-                  <p className="small">Released: {game.released}</p>
-                  <Card.Text>{game.floatRating}</Card.Text>
-                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedGameIds?.some(
-                        (savedGameId: string) => savedGameId === game.gameId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveGame(game.gameId)}
-                    >
-                      {savedGameIds?.some(
-                        (savedGameId: string) => savedGameId === game.gameId
-                      )
-                        ? "This game has already been saved!"
-                        : "Save this Game!"}
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container> */}
     </>
   );
 };
