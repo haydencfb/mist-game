@@ -64,6 +64,8 @@ import { authenticateToken } from './services/auth-service.js';
 
 // startApolloServer();
 
+
+
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
