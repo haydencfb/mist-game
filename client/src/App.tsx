@@ -2,7 +2,6 @@ import { Outlet } from 'react-router-dom';
 import { ApolloClient, InMemoryCache, createHttpLink, ApolloProvider } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 import Auth from "./utils/auth";
-import AppNavbar from './components/Navbar';
 
 const httpLink = createHttpLink({
   uri: "/graphql", // Replace with your GraphQL API endpoint
@@ -27,7 +26,6 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <main>
-        <AppNavbar />
         <Outlet />
       </main>
     </ApolloProvider>
