@@ -4,9 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
 import SearchBooks from './pages/SearchGames';
-import Playing from './pages/Playing';
 import Wishlist from './pages/Wishlist';
-import Completed from './pages/Completed';
 import SignupForm from './components/SignupForm';
 import LoginForm from './pages/LoginForm';
 
@@ -22,8 +20,6 @@ const router = createBrowserRouter([
       { path: '/signup', element: <SignupForm handleModalClose={() => {}} /> },
       { path: '/search', element: <SearchBooks /> },
       { path: '/wishlist', element: <Wishlist /> },
-      { path: '/playing', element: <Playing /> },
-      { path: '/completed', element: <Completed /> },
     ],
   },
 ]);

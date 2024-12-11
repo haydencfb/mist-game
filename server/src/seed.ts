@@ -17,7 +17,6 @@ const games: {
 const fetchData = async () => {
     const response = await fetch(`https://api.rawg.io/api/games?key=${apiKey}`);
     const data = await response.json();
-      console.log(data);
       data.results.forEach((g: any) => {
         const nextGame = {
           title: g.name,
@@ -30,7 +29,6 @@ const fetchData = async () => {
       });
 };
 connection.once("open", async () => {
-  console.log("Connected to DB.");
   try {
     await fetchData();
     await Game.deleteMany({});
@@ -39,9 +37,7 @@ connection.once("open", async () => {
     process.exit(0);
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message);
     } else {
-      console.log("An unknown error occurred");
     }
   }
 });

@@ -25,7 +25,6 @@ const resolvers = {
 
             try {
                 const games = await Game.find();
-                // games.forEach(game => console.log("Parent Platforms:", game.parent_platforms));
                 return games;
             } catch (err) {
                 throw new AuthenticationError("GetAllGames Failed");
