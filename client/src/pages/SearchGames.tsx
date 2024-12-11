@@ -27,6 +27,7 @@ import type { Game } from "../models/Game";
 // Component Imports
 import GameCard from "../components/GameCard";
 import { CardType } from "../components/GameCard";
+import AppNavbar from '../components/Navbar';
 
 const SearchGames = () => {
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
@@ -201,6 +202,7 @@ const SearchGames = () => {
 
   return (
     <>
+      <AppNavbar />
       <div className="text-light bg-dark p-5">
             <Container
             style={{
