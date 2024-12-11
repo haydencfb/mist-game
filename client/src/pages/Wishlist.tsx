@@ -1,12 +1,12 @@
 import { useMutation, useQuery } from '@apollo/client';
 import {REMOVE_GAME} from '../utils/mutations';
 import { GET_ME } from '../utils/queries';
-import AppNavbar from '../components/Navbar';
+// import AppNavbar from '../components/Navbar';
 import type { Game } from '../models/Game';
-import { Box } from '@mui/material';
-import GameCard from '../components/GameCard';
-import { CardType } from '../components/GameCard';
-import { Stack } from '@mui/material';
+// import { Box } from '@mui/material';
+// import GameCard from '../components/GameCard';
+// import { CardType } from '../components/GameCard';
+// import { Stack } from '@mui/material';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import Typography from '@mui/material/Typography';
 import CardContent from '@mui/material/CardContent';
@@ -15,12 +15,17 @@ import type { User } from '../models/User';
 import Auth from '../utils/auth';
 
 const Wishlist = () => {
-    const {loading, data} = useQuery(GET_ME);
+    const {loading, data, error, refetch} = useQuery(GET_ME);
     const [removeGame] = useMutation(REMOVE_GAME);
 
     if (loading) {
         return <h2>LOADING...</h2>;
     }
+
+    if (error) {
+        console.error(error);
+    }
+
     const userData: User = data?.me || {};
 
     const addToWishlist = () => {
@@ -63,7 +68,8 @@ const Wishlist = () => {
       } catch (err) {
         console.error(err);
       }
-
+      
+      refetch();
     // return (
     //     <>
     //         <AppNavbar />
@@ -85,16 +91,20 @@ const Wishlist = () => {
     return (
         <>
           <div className="text-light bg-dark p-5">
-            <Container>
-              <h1>Viewing {userData.username}'s games!</h1>
+            <Container
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
+              <h1>Viewing {userData.username}'s Wishlist!</h1>
             </Container>
           </div>
           <Container>
             <h2 className='pt-5'>
               {userData.savedGames?.length
-                ? `Viewing ${userData.savedGames.length} saved ${userData.savedGames.length === 1 ? 'game' : 'games'
+                ? `Viewing ${userData.savedGames.length} wishlisted ${userData.savedGames.length === 1 ? 'game' : 'games'
                 }:`
-                : 'You have no saved games!'}
+                : 'You have no games on your wishlist!'}
             </h2>
             <div>
               <Row>
@@ -132,4 +142,4 @@ const Wishlist = () => {
 }
 
 
-export default Wishlist
+export default Wishlist;
