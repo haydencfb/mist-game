@@ -196,14 +196,6 @@ const SearchGames = () => {
     handleSaveGame(game1._id);
   };
 
-  // Function to add a game to the playing list
-  const addToPlayingList = () => {
-  };
-
-  // Function to add a game to the completed list
-  const addToCompletedList = () => {
-  };
-
   const profile = Auth.getProfile() as { data: { username: string } };
   const username = profile.data.username;
 
@@ -296,8 +288,6 @@ const SearchGames = () => {
               game={game1}
               cardType={CardType.Search}
               button1={addToWishlist}
-              button2={addToPlayingList}
-              button3={addToCompletedList}
             />
           )}
         </Stack>
@@ -319,8 +309,6 @@ const SearchGames = () => {
               game={sampleGame}
               cardType={CardType.Search}
               button1={addToWishlist}
-              button2={addToPlayingList}
-              button3={addToCompletedList}
             />
         </Stack>
       </Box>
@@ -331,8 +319,6 @@ const SearchGames = () => {
               game={sampleGame2}
               cardType={CardType.Search}
               button1={addToWishlist}
-              button2={addToPlayingList}
-              button3={addToCompletedList}
             />
         </Stack>
       </Box>
@@ -343,8 +329,6 @@ const SearchGames = () => {
               game={sampleGame3}
               cardType={CardType.Search}
               button1={addToWishlist}
-              button2={addToPlayingList}
-              button3={addToCompletedList}
             />
         </Stack>
       </Box>

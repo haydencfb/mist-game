@@ -9,8 +9,6 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 
-import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
-import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistRemoveIcon from "@mui/icons-material/PlaylistRemove";
 
@@ -25,16 +23,12 @@ interface GameCardProps {
   game: Game;
   cardType: CardType;
   button1: () => void;
-  button2: () => void;
-  button3: () => void;
 }
 
 const GameCard = ({
   game,
   cardType,
   button1,
-  button2,
-  button3,
 }: GameCardProps) => {
 
   if (!game) {
@@ -46,22 +40,14 @@ const GameCard = ({
     const buttonConfig: Record<CardType, React.ElementType[]> = {
       [CardType.Search]: [
         PlaylistAddIcon,
-        PlaylistPlayIcon,
-        PlaylistAddCheckIcon,
       ],
       [CardType.Wish]: [
-        PlaylistPlayIcon,
-        PlaylistAddCheckIcon,
         PlaylistRemoveIcon,
       ],
       [CardType.Playing]: [
-        PlaylistAddIcon,
-        PlaylistAddCheckIcon,
         PlaylistRemoveIcon,
       ],
       [CardType.Completed]: [
-        PlaylistAddIcon,
-        PlaylistPlayIcon,
         PlaylistRemoveIcon,
       ],
     };
@@ -83,7 +69,7 @@ const GameCard = ({
         {icons.map((Icon, index) => (
           <IconButton
             key={index}
-            onClick={[button1, button2, button3][index]}
+            onClick={[button1][index]}
             sx={{ "&:hover": { backgroundColor: "#6c1e23" } }}
           >
             <Icon sx={{ height: 35, width: 35, color: "#FFFFFF" }} />
