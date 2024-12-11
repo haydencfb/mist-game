@@ -7,7 +7,7 @@ import { useMutation, useLazyQuery } from "@apollo/client";
 import "../App.css";
 
 // Styling Imports
-import { Container, Col, Form, Row } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import InputBase from "@mui/material/InputBase";
 import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
@@ -20,6 +20,8 @@ import Auth from "../utils/auth";
 import { getSavedGameIds } from "../utils/localStorage";
 import { SAVE_GAME } from "../utils/mutations";
 import { GET_GAMES } from "../utils/queries";
+import type { User } from '../models/User';
+import { GET_ME } from '../utils/queries';
 
 // Model Imports
 import type { Game } from "../models/Game";
@@ -27,7 +29,6 @@ import type { Game } from "../models/Game";
 // Component Imports
 import GameCard from "../components/GameCard";
 import { CardType } from "../components/GameCard";
-import AppNavbar from "../components/Navbar";
 
 const SearchGames = () => {
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
@@ -154,9 +155,20 @@ const SearchGames = () => {
     console.log("Added to completed list");
   };
 
+  const profile = Auth.getProfile() as { data: { username: string } };
+  const username = profile.data.username;
+
   return (
     <>
-      <AppNavbar />
+      <div className="text-light bg-dark p-5">
+            <Container
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}>
+              <h1>Hello {username}!</h1>
+            </Container>
+          </div>
       <Container
         style={{
           display: "flex",

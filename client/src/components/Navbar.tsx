@@ -58,7 +58,7 @@ const AppNavbar = () => {
             </Nav.Link>
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
+        {/* <ListItem disablePadding>
           <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
               <VideogameAssetIcon />
@@ -77,7 +77,7 @@ const AppNavbar = () => {
               <ListItemText>Completed Games</ListItemText>
             </Nav.Link>
           </ListItemButton>
-        </ListItem>
+        </ListItem> */}
         <ListItem disablePadding>
           <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
             <ListItemIcon sx={{ color: '#CCCCCC' }}>
