@@ -5,15 +5,13 @@ import { useMutation } from '@apollo/client';
 import type { ChangeEvent, FormEvent } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
-// import type { User } from '../models/User';
 import { LOGIN_USER } from '../utils/mutations';
-// import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-// biome-ignore lint/correctness/noEmptyPattern: <explanation>
+import { Typography } from '@mui/material';
 const LoginForm = () => {
-  const [userFormData, setUserFormData] = useState({ 
-    email: '', 
+  const [userFormData, setUserFormData] = useState({
+    email: '',
     password: '',
   });
 
@@ -46,20 +44,20 @@ const LoginForm = () => {
       event.stopPropagation();
       return;
     }
-  
+
     try {
       // Assuming `login` is a mutation function from Apollo Client
       const { data } = await login({
         variables: { ...userFormData },
       });
-  
+
       // If login is successful, store the token and navigate to '/search'
       Auth.login(data.login.token);
       setUserFormData({
         email: '',
         password: '',
       });
-  
+
       // Navigate to the search page after successful login
       navigate('/search');
     } catch (err) {
@@ -69,51 +67,80 @@ const LoginForm = () => {
 
   return (
     <>
-    <div className="login-form-container">
-      <h2 className="login-form-title">Login</h2>
-    
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your login credentials!
-        </Alert>
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
-            type='text'
-            placeholder='Your email'
-            name='email'
-            onChange={handleInputChange}
-            value={userFormData.email || ''}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
+      <div className="login-form-container w-50">
+        <h2 className="login-form-title">Login</h2>
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
-            type='password'
-            placeholder='Your password'
-            name='password'
-            onChange={handleInputChange}
-            value={userFormData.password || ''}
-            required
-          />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
-            <span>Don't have an account? </span>
-            <Link to='/signup'>Signup</Link>
+        <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+          <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
+            Something went wrong with your login credentials!
+          </Alert>
+          <Form.Group className='mb-3'>
+            <Form.Label htmlFor='email'>Email</Form.Label>
+            <Form.Control
+              type='text'
+              placeholder='Your email'
+              name='email'
+              onChange={handleInputChange}
+              value={userFormData.email || ''}
+              required
+            />
+            <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className='mb-3'>
+            <Form.Label htmlFor='password'>Password</Form.Label>
+            <Form.Control
+              type='password'
+              placeholder='Your password'
+              name='password'
+              onChange={handleInputChange}
+              value={userFormData.password || ''}
+              required
+            />
+            <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
+          </Form.Group>
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{
+              gap: '5px',
+              textAlign: 'center',
+              marginBottom: '20px',
+              flexWrap: 'nowrap',
+            }}
+          >
+            <Typography
+              variant="body2"
+              sx={{
+                whiteSpace: 'nowrap',
+                fontSize: { xs: '0.8rem', md: '1rem' },
+                display: 'inline-block',
+              }}
+            >
+              Don't have an account?
+            </Typography>
+            <Typography
+              component={Link}
+              to="/signup"
+              variant="body2"
+              sx={{
+                whiteSpace: 'nowrap',
+                fontSize: { xs: '0.8rem', md: '1rem' },
+                '&:hover': { textDecoration: 'underline' },
+              }}
+            >
+              Signup
+            </Typography>
           </div>
 
-        <Button
-         className='login-form-button'
-          disabled={!(userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
+
+          <Button
+            className='login-form-button'
+            disabled={!(userFormData.email && userFormData.password)}
+            type='submit'
+            variant='success'>
+            Submit
+          </Button>
+        </Form>
       </div>
     </>
   );

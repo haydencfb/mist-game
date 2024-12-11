@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import React from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { ChangeEvent, FormEvent } from 'react';
 import { useMutation } from '@apollo/client';
@@ -51,7 +50,6 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
       const { data } = await addUser({
         variables: { ...userFormData },
       });
-      console.log(data);
       Auth.login(data.addUser.token);
       navigate('/');
     } catch (err) {
@@ -67,7 +65,7 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
   return (
     <>
-    <div className="signup-form-container">
+    <div className="signup-form-container w-50">
       <h2 className="signup-form-title">Signup</h2>
       {/* This is needed for the validation functionality above */}
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>

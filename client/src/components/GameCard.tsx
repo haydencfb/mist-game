@@ -1,7 +1,6 @@
 import { Game } from "../models/Game";
 
 import * as React from "react";
-// import { useTheme } from '@mui/material/styles';
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -14,12 +13,6 @@ import PlaylistPlayIcon from "@mui/icons-material/PlaylistPlay";
 import PlaylistAddCheckIcon from "@mui/icons-material/PlaylistAddCheck";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import PlaylistRemoveIcon from "@mui/icons-material/PlaylistRemove";
-
-// import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-// import AccessTimeFilledIcon from '@mui/icons-material/AccessTimeFilled';
-// import CheckIcon from '@mui/icons-material/Check';
-// import RemoveIcon from '@mui/icons-material/Remove';
-// import { Search } from "@mui/icons-material";
 
 export enum CardType {
   Search = "SEARCH",
@@ -43,7 +36,6 @@ const GameCard = ({
   button2,
   button3,
 }: GameCardProps) => {
-  console.log("GameCard received game:", game);
 
   if (!game) {
     return <p>No game data available</p>;

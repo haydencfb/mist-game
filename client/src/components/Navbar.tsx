@@ -8,7 +8,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
-import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -29,7 +28,7 @@ const AppNavbar = () => {
 
   const DrawerList = (
     <Box sx={{
-      width: 250,
+      width: "100%",
       backgroundColor: '#49191E', // Set the background color to #131313
       height: '100vh', // Ensure the box fills the full height of the drawer
       color: '#CCCCCC', // Set the text and icon color to white
@@ -56,26 +55,6 @@ const AppNavbar = () => {
             </ListItemIcon>
             <Nav.Link as={Link} to='/wishlist'>
               <ListItemText>Your Wishlist</ListItemText>
-            </Nav.Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
-            <ListItemIcon sx={{ color: '#CCCCCC' }}>
-              <VideogameAssetIcon />
-            </ListItemIcon>
-            <Nav.Link as={Link} to='/playing'>
-              <ListItemText>Currently Playing</ListItemText>
-            </Nav.Link>
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton sx={{ '&:hover': { backgroundColor: '#6c1e23' } }}>
-            <ListItemIcon sx={{ color: '#CCCCCC' }}>
-              <VideogameAssetIcon />
-            </ListItemIcon>
-            <Nav.Link as={Link} to='/completed'>
-              <ListItemText>Completed Games</ListItemText>
             </Nav.Link>
           </ListItemButton>
         </ListItem>
