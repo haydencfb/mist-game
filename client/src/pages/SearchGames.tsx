@@ -28,6 +28,7 @@ import type { Game } from "../models/Game";
 import GameCard from "../components/GameCard";
 import { CardType } from "../components/GameCard";
 import AppNavbar from '../components/Navbar';
+import { Height } from "@mui/icons-material";
 
 const SearchGames = () => {
   const [searchedGames, setSearchedGames] = useState<Game[]>([]);
@@ -65,7 +66,7 @@ const SearchGames = () => {
       },
     ],
     floatRating: 97,
-    image: "../../public/zelda.webp"
+    image: "https://preview.redd.it/awl2w7ox6icy.jpg?auto=webp&s=1e6bb89acbe3e9b8b2d7e642e56aa6419e3b0007"
   };
 
   const sampleGame2: Game = {
@@ -93,7 +94,7 @@ const SearchGames = () => {
       },
     ],
     floatRating: 4.9,
-    image: "../../public/gta.png"
+    image: "https://media.rockstargames.com/rockstargames/img/global/news/upload/actual_1364906194.jpg"
   };
 
   const sampleGame3: Game = {
@@ -109,7 +110,7 @@ const SearchGames = () => {
       },
     ],
     floatRating: 4.5,
-    image: "../../public/csgo.jpg"
+    image: "https://www.gamespot.com/a/uploads/scale_medium/mig/7/2/0/5/2227205-i2cs9uzmq4yua.jpg"
   };
 
 
@@ -284,7 +285,7 @@ const SearchGames = () => {
       </Container>
 
       <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
-        <Stack sx={{ pt: 2 }} spacing={2}>
+        <Stack sx={{ pt: 2, paddingBottom: 3 }} spacing={2}>
           {isCardVisible && (
             <GameCard
               game={game1}
@@ -305,17 +306,18 @@ const SearchGames = () => {
               <h1>Today's Biggest Hits!</h1>
             </Container>
 
-      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+      <Box sx={{ width: "45%", minWidth: 500, margin: "auto" }}>
         <Stack sx={{ pt: 2 }} spacing={2}>
             <GameCard
               game={sampleGame}
               cardType={CardType.Search}
               button1={addToWishlist}
+              
             />
         </Stack>
       </Box>
 
-      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+      <Box sx={{ width: "45%", minWidth: 500, margin: "auto" }}>
         <Stack sx={{ pt: 2 }} spacing={2}>
             <GameCard
               game={sampleGame2}
@@ -325,7 +327,7 @@ const SearchGames = () => {
         </Stack>
       </Box>
 
-      <Box sx={{ width: "45%", minWidth:500, margin: "auto" }}>
+      <Box sx={{ width: "45%", minWidth: 500, margin: "auto" }}>
         <Stack sx={{ pt: 2 }} spacing={2}>
             <GameCard
               game={sampleGame3}
